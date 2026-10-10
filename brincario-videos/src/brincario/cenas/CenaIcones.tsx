@@ -43,10 +43,13 @@ const Tesoura: React.FC = () => (
   </g>
 );
 
+// Os ícones entram 0,4 s depois da palavra (ajuste do passo 7: estavam entrando cedo demais)
+const ATRASO = 0.4;
+
 const ITENS = [
-  { palavra: "lapis", rotulo: "lápis", x: 230, Icone: Lapis },
-  { palavra: "roupa", rotulo: "roupa", x: 540, Icone: Roupa },
-  { palavra: "tesoura", rotulo: "tesoura", x: 850, Icone: Tesoura },
+  { palavra: "lapis", rotulo: "lápis", x: 230, Icone: Lapis, escala: 1.3 },
+  { palavra: "roupa", rotulo: "roupa", x: 540, Icone: Roupa, escala: 1 },
+  { palavra: "tesoura", rotulo: "tesoura", x: 850, Icone: Tesoura, escala: 1 },
 ];
 
 export const CenaIcones: React.FC = () => {
@@ -78,13 +81,15 @@ export const CenaIcones: React.FC = () => {
           A MESMA BASE PARA
         </text>
 
-        {ITENS.map(({ palavra, rotulo, x, Icone }) => {
-          const p = salto(frame, quando(palavra, tInicio));
+        {ITENS.map(({ palavra, rotulo, x, Icone, escala }) => {
+          const p = salto(frame, quando(palavra, tInicio) + ATRASO);
           if (p <= 0.001) return null;
           return (
             <g key={palavra} transform={`translate(${x} 570) scale(${0.6 + 0.4 * p})`} opacity={Math.min(1, p * 1.5)}>
               <circle r={122} fill={cores.cremeClaro} stroke={cores.salvia} strokeWidth={5} />
-              <Icone />
+              <g transform={`scale(${escala})`}>
+                <Icone />
+              </g>
               <text
                 y={196}
                 textAnchor="middle"
