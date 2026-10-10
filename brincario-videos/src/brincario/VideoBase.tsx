@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 import { CartaoFala } from "./CartaoFala";
+import { FundoAlegre } from "./componentes/Enfeites";
 import { Legendas } from "./Legendas";
 import { cores, layout } from "./tema";
 import type { Palavra } from "./tempo";
@@ -32,6 +33,7 @@ export const VideoBase: React.FC<
   children,
 }) => (
   <AbsoluteFill style={{ backgroundColor: cores.creme }}>
+    <FundoAlegre />
     {children}
     <CartaoFala video={video} recorteY={recorteY} semVideo={semVideo} />
     <Legendas palavras={palavras} />

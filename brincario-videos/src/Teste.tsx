@@ -25,7 +25,11 @@ export const Teste: React.FC = () => {
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
       <AbsoluteFill
-        style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 260 }}
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "center",
+          paddingBottom: 260,
+        }}
       >
         <Img
           src={staticFile("midia/estrela.png")}

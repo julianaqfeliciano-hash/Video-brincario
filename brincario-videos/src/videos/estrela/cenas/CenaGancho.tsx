@@ -1,105 +1,19 @@
 import React from "react";
-import { interpolateColors, useCurrentFrame } from "remotion";
+import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
+import { Brilho, Estalo } from "../../../brincario/componentes/Enfeites";
+import { Personagem } from "../../../brincario/componentes/Personagem";
 import { cores, fonte, fps } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cenas 1–2: "Seu filho não para de mexer as mãos? Calma, isso tem explicação."
-// Título + criança com as mãozinhas inquietas; em "Calma" as mãos desaceleram e descansam;
-// em "explicação" entra a pílula "tem explicação". O título já aparece pronto no quadro 0 (capa).
+// Título + criança agitada com as mãos para cima; em "Calma" ela relaxa, abaixa as mãos e sorri;
+// em "explicação" entra a pílula "tem explicação" com um estalo. O quadro 0 já é a capa.
 
-const OMBRO = { x: 70, y: 642 };
-const BRACO = 118;
-
-const Crianca: React.FC<{ t: number; calma: number }> = ({ t, calma }) => {
-  // Ângulo do braço direito (0° = horizontal p/ fora, positivo = para baixo)
-  const amplitude = 22 * (1 - calma);
-  const base = -35 + (70 + 35) * calma; // mãos para cima e agitadas -> descansando ao lado do corpo
-  const angulo = (fase: number) =>
-    ((base + amplitude * Math.sin(2 * Math.PI * 3.6 * t + fase)) * Math.PI) /
-    180;
-  const mao = (lado: 1 | -1, fase: number) => {
-    const a = angulo(fase);
-    return {
-      x: 540 + lado * (OMBRO.x + BRACO * Math.cos(a)),
-      y: OMBRO.y + BRACO * Math.sin(a),
-    };
-  };
-  const dir = mao(1, 0);
-  const esq = mao(-1, 1.7);
-
-  const linhas = (m: { x: number; y: number }, lado: 1 | -1) =>
-    [0, 1, 2].map((i) => {
-      const r = 42 + i * 14;
-      const ini = -50 + i * 6;
-      const fim = 30 - i * 6;
-      const p = (graus: number) => {
-        const a = (graus * Math.PI) / 180;
-        return `${m.x + lado * r * Math.cos(a)} ${m.y + r * Math.sin(a)}`;
-      };
-      return (
-        <path
-          key={i}
-          d={`M ${p(ini)} A ${r} ${r} 0 0 ${lado === 1 ? 1 : 0} ${p(fim)}`}
-          fill="none"
-          stroke={cores.terracota}
-          strokeWidth={6}
-          strokeLinecap="round"
-          opacity={(1 - calma) * (0.55 + 0.45 * Math.sin(t * 14 + i))}
-        />
-      );
-    });
-
-  return (
-    <g>
-      {/* Braços */}
-      {[
-        { m: dir, lado: 1 },
-        { m: esq, lado: -1 },
-      ].map(({ m, lado }) => (
-        <line
-          key={lado}
-          x1={540 + lado * OMBRO.x}
-          y1={OMBRO.y}
-          x2={m.x}
-          y2={m.y}
-          stroke={cores.salvia}
-          strokeWidth={34}
-          strokeLinecap="round"
-        />
-      ))}
-      {/* Corpo */}
-      <rect
-        x={540 - 88}
-        y={612}
-        width={176}
-        height={168}
-        rx={60}
-        fill={cores.salvia}
-      />
-      {/* Cabeça */}
-      <circle cx={540} cy={548} r={62} fill={cores.terracotaClara} />
-      <path
-        d="M480 540 Q482 480 540 482 Q598 480 600 540 Q585 510 540 512 Q495 510 480 540 Z"
-        fill={cores.salviaEscura}
-      />
-      <circle cx={518} cy={556} r={6} fill={cores.texto} />
-      <circle cx={562} cy={556} r={6} fill={cores.texto} />
-      <path
-        d="M524 578 Q540 590 556 578"
-        fill="none"
-        stroke={cores.texto}
-        strokeWidth={5}
-        strokeLinecap="round"
-      />
-      {/* Mãos */}
-      <circle cx={dir.x} cy={dir.y} r={24} fill={cores.terracotaClara} />
-      <circle cx={esq.x} cy={esq.y} r={24} fill={cores.terracotaClara} />
-      {linhas(dir, 1)}
-      {linhas(esq, -1)}
-    </g>
-  );
-};
+const limitar = {
+  extrapolateLeft: "clamp",
+  extrapolateRight: "clamp",
+} as const;
 
 export const CenaGancho: React.FC = () => {
   const frame = useCurrentFrame();
@@ -115,8 +29,25 @@ export const CenaGancho: React.FC = () => {
     [0, 1],
     [cores.texto, cores.terracota],
   );
+  const sublinhado = entrada(frame, tMaos);
   const calma = entrada(frame, tCalma, { damping: 26, stiffness: 40 });
   const ePilula = salto(frame, tExplicacao);
+
+  // Braços: para cima e agitados -> descansando
+  const agita = (fase: number) =>
+    (1 - calma) * Math.sin(2 * Math.PI * 3.4 * t + fase);
+  const braco = (fase: number) => ({
+    ombro: interpolate(calma, [0, 1], [158, 18]) + 10 * agita(fase),
+    cotovelo: interpolate(calma, [0, 1], [0, 8]) + 28 * agita(fase + 1),
+  });
+  const expressao = calma < 0.35 ? "agitada" : "calma";
+
+  // Linhas de movimento e gotinhas de agitação perto das mãos
+  const agitacao = 1 - calma;
+  const marcas = [
+    { x: 300, y: 500, r: 0 },
+    { x: 640, y: 500, r: 1 },
+  ];
 
   return (
     <Cena inicio={0} fim={tFim} semFadeEntrada>
@@ -126,59 +57,138 @@ export const CenaGancho: React.FC = () => {
         viewBox="0 0 1080 900"
         style={{ position: "absolute" }}
       >
-        <Crianca t={t} calma={calma} />
+        {marcas.map(({ x, y, r }) =>
+          [0, 1, 2].map((i) => {
+            const lado = r === 0 ? -1 : 1;
+            const raio = 38 + i * 16;
+            return (
+              <path
+                key={`${r}-${i}`}
+                d={`M${x + lado * raio * 0.5} ${y - raio * 0.85} A${raio} ${raio} 0 0 ${lado === 1 ? 1 : 0} ${x + lado * raio * 0.5} ${y + raio * 0.85}`}
+                fill="none"
+                stroke={i === 1 ? cores.amarelo : cores.terracota}
+                strokeWidth={7}
+                strokeLinecap="round"
+                opacity={agitacao * (0.55 + 0.45 * Math.sin(t * 14 + i))}
+              />
+            );
+          }),
+        )}
+        <Personagem
+          x={470}
+          y={520}
+          escala={0.72}
+          expressao={expressao}
+          olhosFechados={calma > 0.6}
+          camiseta={cores.azul}
+          bracoEsq={braco(0)}
+          bracoDir={braco(0.5)}
+          inclinacao={4 * agita(0.6)}
+        />
+        {/* Brilhos de alívio quando ela se acalma */}
+        {[
+          { x: 330, y: 410 },
+          { x: 600, y: 390 },
+          { x: 610, y: 640 },
+        ].map((b, i) => (
+          <Brilho
+            key={i}
+            x={b.x}
+            y={b.y}
+            r={18 * entrada(frame, tCalma + 0.2 + i * 0.12)}
+            cor={i === 1 ? cores.amarelo : cores.rosa}
+          />
+        ))}
+        <Estalo x={800} y={500} tempo={tExplicacao} raio={170} />
       </svg>
 
       <div
         style={{
           position: "absolute",
-          top: 272,
+          top: 268,
           width: 1080,
           textAlign: "center",
           fontFamily: fonte,
           fontWeight: 900,
-          fontSize: 74,
+          fontSize: 76,
           lineHeight: 1.08,
           color: cores.texto,
+          isolation: "isolate",
         }}
       >
         Não para de mexer
         <br />
-        as <span style={{ color: corMaos }}>mãos?</span>
+        as{" "}
+        <span style={{ position: "relative", color: corMaos }}>
+          <span
+            style={{
+              position: "absolute",
+              left: -6,
+              right: -6,
+              bottom: 6,
+              height: 26,
+              borderRadius: 13,
+              background: cores.amarelo,
+              transformOrigin: "left center",
+              transform: `scaleX(${sublinhado})`,
+              zIndex: -1,
+            }}
+          />
+          mãos?
+        </span>
       </div>
 
+      {/* Balão de fala saindo da personagem */}
       <div
         style={{
           position: "absolute",
-          top: 790,
-          width: 1080,
-          display: "flex",
-          justifyContent: "center",
+          left: 600,
+          top: 448,
+          transformOrigin: "0% 100%",
+          opacity: Math.min(1, ePilula * 1.5),
+          transform: `scale(${0.4 + 0.6 * ePilula}) rotate(${interpolate(ePilula, [0, 1], [-10, 0], limitar)}deg)`,
         }}
       >
+        <svg
+          width={60}
+          height={50}
+          viewBox="0 0 60 50"
+          style={{ position: "absolute", left: -34, top: 52 }}
+        >
+          <path
+            d="M58 4 L4 44 L52 30 Z"
+            fill={cores.cremeClaro}
+            stroke={cores.texto}
+            strokeWidth={5}
+            strokeLinejoin="round"
+          />
+        </svg>
         <div
           style={{
+            position: "relative",
             display: "inline-flex",
             alignItems: "center",
             gap: 14,
-            height: 66,
-            padding: "0 30px 0 12px",
-            borderRadius: 33,
+            height: 92,
+            padding: "0 34px 0 16px",
+            borderRadius: 46,
             background: cores.cremeClaro,
-            border: `4px solid ${cores.salvia}`,
+            border: `5px solid ${cores.texto}`,
+            boxShadow: `0 7px 0 ${cores.texto}`,
             fontFamily: fonte,
-            fontWeight: 800,
-            fontSize: 36,
+            fontWeight: 900,
+            fontSize: 42,
             color: cores.texto,
-            opacity: Math.min(1, ePilula * 1.5),
-            transform: `scale(${0.6 + 0.4 * ePilula})`,
+            whiteSpace: "nowrap",
           }}
         >
-          <svg width={46} height={46} viewBox="0 0 46 46">
-            <circle cx={23} cy={23} r={23} fill={cores.salvia} />
+          <svg width={56} height={56} viewBox="0 0 46 46">
+            <circle cx={23} cy={23} r={23} fill={cores.amarelo} />
             <path
               d="M23 10 A9 9 0 0 1 29 26 V30 H17 V26 A9 9 0 0 1 23 10 Z"
               fill={cores.cremeClaro}
+              stroke={cores.texto}
+              strokeWidth={2.5}
             />
             <rect
               x={18}
@@ -186,10 +196,10 @@ export const CenaGancho: React.FC = () => {
               width={10}
               height={4}
               rx={2}
-              fill={cores.cremeClaro}
+              fill={cores.texto}
             />
           </svg>
-          tem explicação
+          tem explicação!
         </div>
       </div>
     </Cena>

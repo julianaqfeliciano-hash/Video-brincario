@@ -1,16 +1,26 @@
 import { loadFont } from "@remotion/fonts";
 import { staticFile } from "remotion";
 
-// Paleta e medidas do ESTILO.md (§2.1 e §2.3)
+// Paleta e medidas do ESTILO.md (§2.1 e §2.3) — versão "viva": mesmas funções de cor, tons mais brilhantes
 export const cores = {
-  creme: "#F6EFE3",
-  cremeClaro: "#FBF8F2",
-  salvia: "#8FA98B",
-  salviaEscura: "#5C7A5E",
-  terracota: "#C8694A",
-  terracotaClara: "#E8B39D",
-  texto: "#3B332E",
+  creme: "#FFF3D6", // fundo amanteigado
+  cremeClaro: "#FFFFFF", // cartões, selos e balões
+  salvia: "#2EC4A0", // verde-menta (ilustrações, ícones)
+  salviaEscura: "#13836B", // rótulos pequenos, linhas de chamada
+  terracota: "#FF5E3A", // coral vivo: o destaque
+  terracotaClara: "#FFB59E",
+  texto: "#2B2350", // índigo escuro: texto e contorno dos desenhos
   branco: "#FFFFFF",
+  // Cores de apoio (ilustrações, confetes, fundos de ícones)
+  amarelo: "#FFC530",
+  lilas: "#8E6CFF",
+  azul: "#3DA5FF",
+  rosa: "#FF7AB8",
+  // Personagens
+  pele: "#F9C9A5",
+  peleSombra: "#EBA57E",
+  cabelo: "#5A3524",
+  bochecha: "#FF8FA3",
 };
 
 export const fonte = "Nunito";
