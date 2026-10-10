@@ -3,6 +3,7 @@ import { AbsoluteFill } from "remotion";
 import transcricao from "../../public/legendas/fala_cortada.json";
 import { CartaoFala } from "./CartaoFala";
 import { Legendas } from "./Legendas";
+import { CenaToque } from "./cenas/CenaToque";
 import { cores, fps, layout } from "./tema";
 
 // Tempo extra com o cartão final parado depois da fala (ROTEIRO.md, cena 16)
@@ -13,16 +14,8 @@ export const duracaoEstrela = Math.ceil((transcricao.duracao + SEGUNDOS_FINAIS) 
 export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: cores.creme }}>
-      {/* Painel de ilustração (as cenas entram aqui no passo 6) */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: layout.painel.y,
-          width: layout.largura,
-          height: layout.painel.altura,
-        }}
-      />
+      {/* Painel de ilustração: cada cena aparece só no seu trecho (ROTEIRO.md) */}
+      <CenaToque />
 
       <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" />
       <Legendas palavras={transcricao.palavras} />
