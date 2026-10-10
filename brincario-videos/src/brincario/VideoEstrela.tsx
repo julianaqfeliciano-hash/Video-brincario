@@ -3,6 +3,7 @@ import { AbsoluteFill } from "remotion";
 import transcricao from "../../public/legendas/fala_cortada.json";
 import { CartaoFala } from "./CartaoFala";
 import { Legendas } from "./Legendas";
+import { CenaBroll } from "./cenas/CenaBroll";
 import { CenaIcones } from "./cenas/CenaIcones";
 import { CenaPinca } from "./cenas/CenaPinca";
 import { CenaToque } from "./cenas/CenaToque";
@@ -20,6 +21,7 @@ export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) =
       <CenaToque />
       <CenaPinca />
       <CenaIcones />
+      <CenaBroll />
 
       <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" />
       <Legendas palavras={transcricao.palavras} />
