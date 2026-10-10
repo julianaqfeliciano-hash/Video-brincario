@@ -27,7 +27,7 @@ export const CenaFerramenta: React.FC = () => {
   const gira = Math.sin(frame / 10) * 6;
 
   return (
-    <Cena inicio={tEstrela - 0.15} fim={tFim}>
+    <Cena inicio={quando("a", tDesacelerar)} fim={tFim}>
       <div
         style={{
           position: "absolute",

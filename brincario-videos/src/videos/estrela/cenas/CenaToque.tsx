@@ -61,7 +61,7 @@ export const CenaToque: React.FC = () => {
   const tQuando = quando("quando", tSentindo);
   const tEstimulo = quando("estimulo");
   const tDesacelerar = quando("desacelerar");
-  const tFim = quando("estrela", tDesacelerar) - 0.15;
+  const tFim = quando("a", tDesacelerar); // termina no "A" de "A estrela tátil"
 
   const eCena = entrada(frame, tMuitas);
   const eBalao = entrada(frame, tToque, { damping: 12, stiffness: 140 });
