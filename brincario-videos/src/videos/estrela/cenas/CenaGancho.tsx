@@ -2,7 +2,7 @@ import React from "react";
 import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
 import { Brilho, Estalo } from "../../../brincario/componentes/Enfeites";
-import { Personagem } from "../../../brincario/componentes/Personagem";
+import { Capivara } from "../../../brincario/componentes/Capivara";
 import { cores, fonte, fps } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
@@ -37,10 +37,15 @@ export const CenaGancho: React.FC = () => {
   const agita = (fase: number) =>
     (1 - calma) * Math.sin(2 * Math.PI * 3.4 * t + fase);
   const braco = (fase: number) => ({
-    ombro: interpolate(calma, [0, 1], [158, 18]) + 10 * agita(fase),
-    cotovelo: interpolate(calma, [0, 1], [0, 8]) + 28 * agita(fase + 1),
+    ombro: interpolate(calma, [0, 1], [150, -25]) + 10 * agita(fase),
+    cotovelo: interpolate(calma, [0, 1], [0, -50]) + 28 * agita(fase + 1),
   });
-  const expressao = calma < 0.35 ? "agitada" : "calma";
+  const expressao =
+    calma < 0.35
+      ? "agitada"
+      : frame >= Math.round(tExplicacao * fps) - 2
+        ? "feliz"
+        : "calma";
 
   // Linhas de movimento e gotinhas de agitação perto das mãos
   const agitacao = 1 - calma;
@@ -74,13 +79,11 @@ export const CenaGancho: React.FC = () => {
             );
           }),
         )}
-        <Personagem
+        <Capivara
           x={470}
-          y={520}
-          escala={0.72}
+          y={620}
+          escala={0.82}
           expressao={expressao}
-          olhosFechados={calma > 0.6}
-          camiseta={cores.azul}
           bracoEsq={braco(0)}
           bracoDir={braco(0.5)}
           inclinacao={4 * agita(0.6)}
