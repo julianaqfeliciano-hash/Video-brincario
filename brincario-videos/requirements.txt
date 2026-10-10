@@ -1,0 +1,3 @@
+faster-whisper
+# av>=16 removeu o argumento metadata_errors usado pelo faster-whisper 1.2.1
+av<16
