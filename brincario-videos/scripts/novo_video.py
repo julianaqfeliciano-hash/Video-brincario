@@ -148,6 +148,7 @@ def cortar(a):
     rodar(
         PY, "scripts/aplicar_cortes.py", origem["fala"], pub / "transcricao.json", pub / "cortes.json",
         pub / "fala_cortada.mp4", pub / "fala_cortada.json",
+        "--velocidade", str(a.velocidade), *(["--filtro", a.filtro] if a.filtro else []),
     )
 
 
@@ -162,6 +163,8 @@ p.add_argument("--modelo", default="small", help="modelo do Whisper (small, medi
 p.set_defaults(func=preparar)
 c = sub.add_parser("cortar")
 c.add_argument("slug")
+c.add_argument("--velocidade", type=float, default=1.0, help="ex.: 1.15 para fala lenta")
+c.add_argument("--filtro", default="", help='tratamento de imagem, ex.: "eq=contrast=1.08:saturation=1.15"')
 c.set_defaults(func=cortar)
 
 args = parser.parse_args()

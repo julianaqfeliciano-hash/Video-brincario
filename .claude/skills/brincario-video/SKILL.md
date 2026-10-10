@@ -90,8 +90,17 @@ versão; destaque pausas no **meio** de uma frase (cortar deixa mais corrido, ma
 Ajuste o JSON se ela pedir e só então:
 
 ```bash
-.venv/bin/python scripts/novo_video.py cortar <slug>
+.venv/bin/python scripts/novo_video.py cortar <slug> [--velocidade 1.15] [--filtro "<ffmpeg>"]
 ```
+
+- **Ritmo:** depois dos cortes, calcule palavras por segundo. Abaixo de ~3 palavras/s a fala soa lenta
+  para Reels: use `--velocidade 1.1`–`1.2` (o `atempo` mantém o tom da voz; os tempos das palavras
+  são ajustados juntos).
+- **Imagem:** meça o brilho (`signalstats` YAVG) e compare um quadro antes/depois. Tratamento usado
+  na Estrela: `eq=contrast=1.07:saturation=1.1:gamma=1.02,colorbalance=rm=0.04:gm=-0.015:bm=-0.04,unsharp=5:5:0.6`
+  (pele mais quente, sem puxar o fundo cinza para o verde; nitidez ajuda no vídeo ampliado ~2x).
+- **Marca d'água** (ex.: "Made with Teleprompter.com" pulando pelos cantos): monte uma folha de
+  contato da fala cortada e escolha `recorteY` para a janela do cartão ficar entre as marcas.
 
 ### 3. Planejar as ilustrações (ainda sem construir)
 
@@ -152,6 +161,10 @@ export const CenaExemplo: React.FC = () => {
 ```
 
 - Tempos **sempre** via `quando(...)`, nunca números fixos: se a fala mudar, a cena acompanha.
+- **Fala regravada?** Liste as palavras que as cenas pedem a `quando` e confira se existem na nova
+  transcrição — e se a ocorrência encontrada é a certa (ex.: "Ao mexer" virou "Para mexer", e
+  `quando("ao")` passaria a achar o "ao" de "ao mesmo tempo"). Trechos do anúncio também são
+  calculados por palavras (`Anuncio.tsx` da Estrela), nunca por quadros fixos.
 - Uma única cor de destaque (coral) por quadro; elementos entram em sequência; nada de piscar.
 - Personagem = sempre a capivara escoteira (`Capivara`); texto sobre cenário com `textoClaro`;
   cartões e círculos no estilo "adesivo" (ver ESTILO.md §2.1 e §2.5).

@@ -8,7 +8,7 @@ import {
 import { cores, fonte, fps } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
-// ROTEIRO.md, cena 8: "Ao mexer nas pontinhas, ela usa a pinça dos dedos e as duas mãos ao mesmo tempo."
+// ROTEIRO.md, cena 8: "Para mexer nas pontinhas, ela usa as pinças dos dedos e as duas mãos ao mesmo tempo."
 // Patinha de capivara (dedinhos com almofadinhas destacadas) pinçando a pontinha de uma estrela; rótulo "pinça";
 // em "duas mãos" entra a segunda mão, espelhada.
 
@@ -187,9 +187,9 @@ export const CenaPinca: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / fps;
 
-  const tAo = quando("ao");
+  const tAo = quando("para", quando("acalmar")); // "Para mexer nas pontinhas"
   const tPontinhas = quando("pontinhas");
-  const tPinca = quando("pinca");
+  const tPinca = quando("pincas", tPontinhas);
   const tDuas = quando("duas");
   const tFim = quando("a", tDuas) - 0.1;
 

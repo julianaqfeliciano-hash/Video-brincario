@@ -6,6 +6,10 @@ Uso:
 
 Gera um vídeo a 30 fps constantes (o Remotion trabalha melhor assim) e uma transcrição
 com os tempos já na linha do tempo cortada.
+
+Opcional:
+  --velocidade 1.15     acelera fala e imagem (o tom de voz não muda) e ajusta os tempos das palavras
+  --filtro "eq=..."     tratamento de imagem do ffmpeg (brilho, contraste, cor, nitidez)
 """
 import argparse
 import json
@@ -19,6 +23,8 @@ parser.add_argument("cortes")
 parser.add_argument("video_saida")
 parser.add_argument("transcricao_saida")
 parser.add_argument("--fps", type=int, default=30)
+parser.add_argument("--velocidade", type=float, default=1.0)
+parser.add_argument("--filtro", default="")
 args = parser.parse_args()
 
 dados = json.loads(Path(args.transcricao).read_text(encoding="utf-8"))
@@ -44,12 +50,15 @@ for i, (a, b) in enumerate(mantidos):
     )
     entradas += f"[v{i}][a{i}]"
 filtros.append(f"{entradas}concat=n={len(mantidos)}:v=1:a=1[vc][ac]")
-filtros.append(f"[vc]fps={args.fps}[vo]")
+v = args.velocidade
+tratamento = f",{args.filtro}" if args.filtro else ""
+filtros.append(f"[vc]setpts=PTS/{v},fps={args.fps}{tratamento}[vo]")
+filtros.append(f"[ac]atempo={v}[ao]")
 
 Path(args.video_saida).parent.mkdir(parents=True, exist_ok=True)
 subprocess.run(
     ["ffmpeg", "-v", "error", "-y", "-i", args.video, "-filter_complex", ";".join(filtros),
-     "-map", "[vo]", "-map", "[ac]", "-c:v", "libx264", "-crf", "16", "-preset", "medium",
+     "-map", "[vo]", "-map", "[ao]", "-c:v", "libx264", "-crf", "16", "-preset", "medium",
      "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", args.video_saida],
     check=True,
 )
@@ -58,10 +67,10 @@ subprocess.run(
 def novo_tempo(x):
     """Converte um tempo do bruto para a linha do tempo cortada."""
     removido = sum(min(c["fim"], x) - c["inicio"] for c in cortes if c["inicio"] < x)
-    return round(x - removido, 3)
+    return round((x - removido) / v, 3)
 
 
-duracao = round(sum(b - a for a, b in mantidos), 3)
+duracao = round(sum(b - a for a, b in mantidos) / v, 3)
 palavras = [
     {"texto": w["texto"], "inicio": novo_tempo(w["inicio"]), "fim": novo_tempo(w["fim"])}
     for w in dados["palavras"]

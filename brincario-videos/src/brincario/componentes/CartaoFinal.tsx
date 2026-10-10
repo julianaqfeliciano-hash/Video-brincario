@@ -13,6 +13,8 @@ export const CartaoFinal: React.FC<{
   tDestaque: number; // a palavra de destaque fica terracota
   tBotao: number; // entra o botão
   tArroba: number; // entra o @
+  pergunta?: string; // frase opcional acima do botão (ex.: "Quer ajudar seu filho?")
+  tPergunta?: number;
   linha1?: string;
   antesDestaque?: string;
   destaque?: string;
@@ -28,6 +30,8 @@ export const CartaoFinal: React.FC<{
   destaque = "cuidar",
   botao = "Link na bio",
   arroba = "@brincario.loja",
+  pergunta,
+  tPergunta,
 }) => {
   const frame = useCurrentFrame();
 
@@ -40,6 +44,7 @@ export const CartaoFinal: React.FC<{
   );
   const eBotao = salto(frame, tBotao);
   const eArroba = entrada(frame, tArroba);
+  const ePergunta = tPergunta === undefined ? 0 : salto(frame, tPergunta);
 
   return (
     <Cena inicio={inicio} fim={9999}>
@@ -58,7 +63,7 @@ export const CartaoFinal: React.FC<{
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 40,
+          gap: pergunta ? 26 : 40,
           fontFamily: fonte,
           opacity: Math.min(1, eCartao * 1.5),
           transform: `scale(${0.85 + 0.15 * eCartao})`,
@@ -80,6 +85,20 @@ export const CartaoFinal: React.FC<{
           {antesDestaque}
           <span style={{ color: corDestaque }}>{destaque}</span>
         </div>
+
+        {pergunta && (
+          <div
+            style={{
+              fontWeight: 900,
+              fontSize: 50,
+              color: cores.terracota,
+              opacity: Math.min(1, ePergunta * 1.5),
+              transform: `scale(${0.6 + 0.4 * ePergunta})`,
+            }}
+          >
+            {pergunta}
+          </div>
+        )}
 
         <div
           style={{

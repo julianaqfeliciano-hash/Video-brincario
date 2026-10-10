@@ -5,10 +5,10 @@ import { MolduraBroll } from "../../../brincario/componentes/MolduraBroll";
 import { fonte, textoClaro } from "../../../brincario/tema";
 import { entrada, midia, quando, salto } from "../dados";
 
-// ROTEIRO.md, cenas 10–13: "e ainda vira brincadeira. Coroa, pulseira, estrela do mar."
-// Trechos de broll/parque.mp4 em moldura arredondada com zoom lento.
-// "coroa", "pulseira" e "estrela do mar" duram ~0,5 s cada na fala, então os três trechos entram
-// lado a lado, um por palavra, e continuam tocando até "É silenciosa".
+// ROTEIRO.md, cenas 10–13: "E ainda vira uma brincadeira. Por ser estrela do mar, ..."
+// Trechos de broll/parque.mp4 em moldura arredondada com zoom lento: mãos brincando em
+// "brincadeira"; depois os três jeitos de brincar (coroa, pulseira, estrela do mar) lado a lado,
+// entrando em "Por", "ser" e "estrela", e tocando até "ela é silenciosa".
 
 const Rotulo: React.FC<{
   x: number;
@@ -38,10 +38,11 @@ export const CenaBroll: React.FC = () => {
   const frame = useCurrentFrame();
 
   const tBrincadeira = quando("brincadeira");
-  const tCoroa = quando("coroa");
-  const tPulseira = quando("pulseira");
+  // "Por ser estrela do mar": as três molduras (coroa, pulseira, estrela do mar) entram uma por palavra
+  const tCoroa = quando("por", tBrincadeira);
+  const tPulseira = quando("ser", tCoroa);
   const tEstrela = quando("estrela", tPulseira);
-  const tFim = quando("e", tEstrela) - 0.1; // "É silenciosa"
+  const tFim = quando("ela", tEstrela) - 0.1; // "ela é silenciosa"
 
   // Moldura única com as mãos brincando, de "brincadeira" até "coroa"
   const eBrincadeira = salto(frame, tBrincadeira);

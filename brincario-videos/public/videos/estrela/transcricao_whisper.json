@@ -1,675 +1,740 @@
 {
-  "duracao": 42.432,
+  "duracao": 64.83,
   "palavras": [
     {
       "texto": "Seu",
-      "inicio": 0.0,
-      "fim": 0.28
+      "inicio": 0.02,
+      "fim": 0.78
     },
     {
       "texto": "filho",
-      "inicio": 0.28,
-      "fim": 0.44
+      "inicio": 0.78,
+      "fim": 1.0
     },
     {
       "texto": "não",
-      "inicio": 0.44,
-      "fim": 0.56
+      "inicio": 1.0,
+      "fim": 1.34
     },
     {
       "texto": "para",
-      "inicio": 0.56,
-      "fim": 0.76
+      "inicio": 1.34,
+      "fim": 1.68
     },
     {
       "texto": "de",
-      "inicio": 0.76,
-      "fim": 0.9
+      "inicio": 1.68,
+      "fim": 1.96
     },
     {
       "texto": "mexer",
-      "inicio": 0.9,
-      "fim": 1.18
+      "inicio": 1.96,
+      "fim": 2.3
     },
     {
       "texto": "as",
-      "inicio": 1.18,
-      "fim": 1.36
+      "inicio": 2.3,
+      "fim": 2.56
     },
     {
-      "texto": "mãos,",
-      "inicio": 1.36,
-      "fim": 1.7
+      "texto": "mãos?",
+      "inicio": 2.56,
+      "fim": 3.02
     },
     {
-      "texto": "calma,",
-      "inicio": 1.7,
-      "fim": 2.16
+      "texto": "Calma,",
+      "inicio": 3.08,
+      "fim": 3.6
     },
     {
       "texto": "isso",
-      "inicio": 2.28,
-      "fim": 2.4
+      "inicio": 3.62,
+      "fim": 3.88
     },
     {
       "texto": "tem",
-      "inicio": 2.4,
-      "fim": 2.62
-    },
-    {
-      "texto": "explicação.",
-      "inicio": 2.62,
-      "fim": 3.18
-    },
-    {
-      "texto": "Eu",
-      "inicio": 3.56,
-      "fim": 3.68
-    },
-    {
-      "texto": "sou",
-      "inicio": 3.68,
-      "fim": 3.82
-    },
-    {
-      "texto": "a",
-      "inicio": 3.82,
-      "fim": 3.94
-    },
-    {
-      "texto": "Juliana,",
-      "inicio": 3.94,
-      "fim": 4.3
-    },
-    {
-      "texto": "psicóloga",
-      "inicio": 4.52,
-      "fim": 4.92
-    },
-    {
-      "texto": "infantil.",
-      "inicio": 4.92,
-      "fim": 5.46
-    },
-    {
-      "texto": "Muitas",
-      "inicio": 5.92,
-      "fim": 6.1
-    },
-    {
-      "texto": "crianças",
-      "inicio": 6.1,
-      "fim": 6.4
-    },
-    {
-      "texto": "precisam",
-      "inicio": 6.4,
-      "fim": 6.94
-    },
-    {
-      "texto": "do",
-      "inicio": 6.94,
-      "fim": 7.08
-    },
-    {
-      "texto": "toque",
-      "inicio": 7.08,
-      "fim": 7.44
-    },
-    {
-      "texto": "e",
-      "inicio": 7.44,
-      "fim": 7.52
-    },
-    {
-      "texto": "do",
-      "inicio": 7.52,
-      "fim": 7.56
-    },
-    {
-      "texto": "movimento",
-      "inicio": 7.56,
-      "fim": 7.8
-    },
-    {
-      "texto": "para",
-      "inicio": 7.8,
-      "fim": 8.2
-    },
-    {
-      "texto": "organizar",
-      "inicio": 8.2,
-      "fim": 8.66
-    },
-    {
-      "texto": "o",
-      "inicio": 8.66,
-      "fim": 8.78
-    },
-    {
-      "texto": "que",
-      "inicio": 8.78,
-      "fim": 8.92
-    },
-    {
-      "texto": "estão",
-      "inicio": 8.92,
-      "fim": 9.16
-    },
-    {
-      "texto": "sentindo.",
-      "inicio": 9.16,
-      "fim": 9.76
-    },
-    {
-      "texto": "Quando",
-      "inicio": 10.18,
-      "fim": 10.3
-    },
-    {
-      "texto": "as",
-      "inicio": 10.3,
-      "fim": 10.46
-    },
-    {
-      "texto": "mãos",
-      "inicio": 10.46,
-      "fim": 10.66
-    },
-    {
-      "texto": "recebem",
-      "inicio": 10.66,
-      "fim": 11.04
-    },
-    {
-      "texto": "estímulo,",
-      "inicio": 11.04,
-      "fim": 11.54
-    },
-    {
-      "texto": "o",
-      "inicio": 11.68,
-      "fim": 11.74
-    },
-    {
-      "texto": "corpo",
-      "inicio": 11.74,
-      "fim": 12.0
-    },
-    {
-      "texto": "encontra",
-      "inicio": 12.0,
-      "fim": 12.28
-    },
-    {
-      "texto": "um",
-      "inicio": 12.28,
-      "fim": 12.62
-    },
-    {
-      "texto": "jeito",
-      "inicio": 12.62,
-      "fim": 12.8
-    },
-    {
-      "texto": "de",
-      "inicio": 12.8,
-      "fim": 13.02
-    },
-    {
-      "texto": "desacelerar.",
-      "inicio": 13.02,
-      "fim": 13.9
-    },
-    {
-      "texto": "A",
-      "inicio": 14.54,
-      "fim": 14.64
-    },
-    {
-      "texto": "estrela",
-      "inicio": 14.64,
-      "fim": 15.0
-    },
-    {
-      "texto": "Tati",
-      "inicio": 15.0,
-      "fim": 15.44
-    },
-    {
-      "texto": "vira",
-      "inicio": 15.44,
-      "fim": 15.8
+      "inicio": 3.88,
+      "fim": 4.08
     },
     {
       "texto": "uma",
-      "inicio": 15.8,
-      "fim": 15.88
+      "inicio": 4.08,
+      "fim": 4.32
     },
     {
-      "texto": "ferramenta",
-      "inicio": 15.88,
-      "fim": 16.38
+      "texto": "explicação.",
+      "inicio": 4.32,
+      "fim": 4.96
+    },
+    {
+      "texto": "Eu",
+      "inicio": 5.36,
+      "fim": 5.44
+    },
+    {
+      "texto": "sou",
+      "inicio": 5.44,
+      "fim": 5.66
+    },
+    {
+      "texto": "a",
+      "inicio": 5.66,
+      "fim": 5.82
+    },
+    {
+      "texto": "Juliana,",
+      "inicio": 5.82,
+      "fim": 6.26
+    },
+    {
+      "texto": "psicóloga",
+      "inicio": 6.58,
+      "fim": 7.0
+    },
+    {
+      "texto": "e",
+      "inicio": 7.0,
+      "fim": 7.14
+    },
+    {
+      "texto": "infanto",
+      "inicio": 7.14,
+      "fim": 7.48
+    },
+    {
+      "texto": "juvenil.",
+      "inicio": 7.48,
+      "fim": 8.24
+    },
+    {
+      "texto": "Muitas",
+      "inicio": 8.78,
+      "fim": 9.24
+    },
+    {
+      "texto": "crianças",
+      "inicio": 9.24,
+      "fim": 9.68
+    },
+    {
+      "texto": "precisam",
+      "inicio": 9.68,
+      "fim": 10.58
     },
     {
       "texto": "de",
-      "inicio": 16.38,
-      "fim": 16.54
+      "inicio": 10.58,
+      "fim": 10.82
     },
     {
-      "texto": "autoregulação.",
-      "inicio": 16.54,
-      "fim": 17.4
+      "texto": "um",
+      "inicio": 10.82,
+      "fim": 11.14
     },
     {
-      "texto": "A",
-      "inicio": 17.52,
-      "fim": 17.56
-    },
-    {
-      "texto": "criança",
-      "inicio": 17.56,
-      "fim": 17.84
-    },
-    {
-      "texto": "aprende",
-      "inicio": 17.84,
-      "fim": 18.42
-    },
-    {
-      "texto": "que",
-      "inicio": 18.42,
-      "fim": 18.6
-    },
-    {
-      "texto": "quando",
-      "inicio": 18.6,
-      "fim": 19.18
-    },
-    {
-      "texto": "a",
-      "inicio": 19.18,
-      "fim": 19.34
-    },
-    {
-      "texto": "agitação",
-      "inicio": 19.34,
-      "fim": 19.9
-    },
-    {
-      "texto": "sobe,",
-      "inicio": 19.9,
-      "fim": 20.34
-    },
-    {
-      "texto": "existe",
-      "inicio": 20.44,
-      "fim": 20.66
-    },
-    {
-      "texto": "algo",
-      "inicio": 20.66,
-      "fim": 21.0
-    },
-    {
-      "texto": "que",
-      "inicio": 21.0,
-      "fim": 21.16
-    },
-    {
-      "texto": "ela",
-      "inicio": 21.16,
-      "fim": 21.26
-    },
-    {
-      "texto": "mesma",
-      "inicio": 21.26,
-      "fim": 21.48
-    },
-    {
-      "texto": "pode",
-      "inicio": 21.48,
-      "fim": 21.7
-    },
-    {
-      "texto": "fazer",
-      "inicio": 21.7,
-      "fim": 22.06
-    },
-    {
-      "texto": "para",
-      "inicio": 22.06,
-      "fim": 22.3
-    },
-    {
-      "texto": "se",
-      "inicio": 22.3,
-      "fim": 22.46
-    },
-    {
-      "texto": "acalmar,",
-      "inicio": 22.46,
-      "fim": 22.86
-    },
-    {
-      "texto": "para",
-      "inicio": 23.42,
-      "fim": 23.48
-    },
-    {
-      "texto": "mexer",
-      "inicio": 23.48,
-      "fim": 23.76
-    },
-    {
-      "texto": "nas",
-      "inicio": 23.76,
-      "fim": 23.9
-    },
-    {
-      "texto": "pontinhas",
-      "inicio": 23.9,
-      "fim": 24.38
+      "texto": "toque",
+      "inicio": 11.14,
+      "fim": 11.54
     },
     {
       "texto": "e",
-      "inicio": 24.38,
-      "fim": 24.56
-    },
-    {
-      "texto": "ela",
-      "inicio": 24.56,
-      "fim": 24.66
-    },
-    {
-      "texto": "usar",
-      "inicio": 24.66,
-      "fim": 24.86
-    },
-    {
-      "texto": "a",
-      "inicio": 24.86,
-      "fim": 25.0
-    },
-    {
-      "texto": "pinça",
-      "inicio": 25.0,
-      "fim": 25.22
-    },
-    {
-      "texto": "dos",
-      "inicio": 25.22,
-      "fim": 25.42
-    },
-    {
-      "texto": "dedos",
-      "inicio": 25.42,
-      "fim": 25.76
-    },
-    {
-      "texto": "e",
-      "inicio": 25.76,
-      "fim": 25.88
-    },
-    {
-      "texto": "as",
-      "inicio": 25.88,
-      "fim": 26.0
-    },
-    {
-      "texto": "duas",
-      "inicio": 26.0,
-      "fim": 26.14
-    },
-    {
-      "texto": "mãos",
-      "inicio": 26.14,
-      "fim": 26.46
-    },
-    {
-      "texto": "ao",
-      "inicio": 26.46,
-      "fim": 26.56
-    },
-    {
-      "texto": "mesmo",
-      "inicio": 26.56,
-      "fim": 26.74
-    },
-    {
-      "texto": "tempo.",
-      "inicio": 26.74,
-      "fim": 27.1
-    },
-    {
-      "texto": "A",
-      "inicio": 27.1,
-      "fim": 27.66
-    },
-    {
-      "texto": "mesma",
-      "inicio": 27.66,
-      "fim": 27.86
-    },
-    {
-      "texto": "base",
-      "inicio": 27.86,
-      "fim": 28.3
-    },
-    {
-      "texto": "para",
-      "inicio": 28.3,
-      "fim": 28.52
-    },
-    {
-      "texto": "segurar",
-      "inicio": 28.52,
-      "fim": 28.96
-    },
-    {
-      "texto": "o",
-      "inicio": 28.96,
-      "fim": 29.06
-    },
-    {
-      "texto": "lápis,",
-      "inicio": 29.06,
-      "fim": 29.4
-    },
-    {
-      "texto": "a",
-      "inicio": 29.48,
-      "fim": 29.52
-    },
-    {
-      "texto": "botar",
-      "inicio": 29.52,
-      "fim": 29.82
-    },
-    {
-      "texto": "a",
-      "inicio": 29.82,
-      "fim": 29.92
-    },
-    {
-      "texto": "roupa",
-      "inicio": 29.92,
-      "fim": 30.32
-    },
-    {
-      "texto": "e",
-      "inicio": 30.32,
-      "fim": 30.4
-    },
-    {
-      "texto": "usar",
-      "inicio": 30.4,
-      "fim": 30.58
-    },
-    {
-      "texto": "a",
-      "inicio": 30.58,
-      "fim": 30.72
-    },
-    {
-      "texto": "tesoura",
-      "inicio": 30.72,
-      "fim": 31.14
-    },
-    {
-      "texto": "e",
-      "inicio": 31.14,
-      "fim": 31.24
-    },
-    {
-      "texto": "ainda",
-      "inicio": 31.24,
-      "fim": 31.4
-    },
-    {
-      "texto": "vira",
-      "inicio": 31.4,
-      "fim": 31.76
-    },
-    {
-      "texto": "brincadeira.",
-      "inicio": 31.76,
-      "fim": 32.42
-    },
-    {
-      "texto": "Coroa,",
-      "inicio": 32.6,
-      "fim": 33.02
-    },
-    {
-      "texto": "pulseira,",
-      "inicio": 33.12,
-      "fim": 33.56
-    },
-    {
-      "texto": "estrela",
-      "inicio": 33.64,
-      "fim": 33.94
+      "inicio": 11.54,
+      "fim": 11.86
     },
     {
       "texto": "do",
-      "inicio": 33.94,
-      "fim": 34.06
+      "inicio": 11.86,
+      "fim": 12.0
     },
     {
-      "texto": "mar.",
-      "inicio": 34.06,
-      "fim": 34.26
+      "texto": "movimento",
+      "inicio": 12.0,
+      "fim": 12.54
     },
     {
-      "texto": "É",
-      "inicio": 34.8,
-      "fim": 34.96
+      "texto": "para",
+      "inicio": 12.54,
+      "fim": 12.84
     },
     {
-      "texto": "silenciosa",
-      "inicio": 34.96,
-      "fim": 35.64
+      "texto": "organizar",
+      "inicio": 12.84,
+      "fim": 13.42
     },
     {
-      "texto": "e",
-      "inicio": 35.64,
-      "fim": 35.78
+      "texto": "o",
+      "inicio": 13.42,
+      "fim": 13.54
     },
     {
-      "texto": "cabe",
-      "inicio": 35.78,
-      "fim": 35.94
+      "texto": "que",
+      "inicio": 13.54,
+      "fim": 13.72
     },
     {
-      "texto": "na",
-      "inicio": 35.94,
-      "fim": 36.1
+      "texto": "estão",
+      "inicio": 13.72,
+      "fim": 13.92
     },
     {
-      "texto": "mochila,",
-      "inicio": 36.1,
-      "fim": 36.66
+      "texto": "sentindo.",
+      "inicio": 13.92,
+      "fim": 14.88
     },
     {
-      "texto": "escola,",
-      "inicio": 36.86,
-      "fim": 37.2
+      "texto": "Quando",
+      "inicio": 14.98,
+      "fim": 15.24
     },
     {
-      "texto": "sala",
-      "inicio": 37.44,
-      "fim": 37.62
+      "texto": "as",
+      "inicio": 15.24,
+      "fim": 15.48
+    },
+    {
+      "texto": "mãos",
+      "inicio": 15.48,
+      "fim": 15.78
+    },
+    {
+      "texto": "recebem",
+      "inicio": 15.78,
+      "fim": 16.26
+    },
+    {
+      "texto": "estímulo,",
+      "inicio": 16.26,
+      "fim": 16.8
+    },
+    {
+      "texto": "o",
+      "inicio": 17.08,
+      "fim": 17.2
+    },
+    {
+      "texto": "corpo",
+      "inicio": 17.2,
+      "fim": 17.46
+    },
+    {
+      "texto": "encontra",
+      "inicio": 17.46,
+      "fim": 17.98
+    },
+    {
+      "texto": "um",
+      "inicio": 17.98,
+      "fim": 18.32
+    },
+    {
+      "texto": "jeito",
+      "inicio": 18.32,
+      "fim": 18.66
     },
     {
       "texto": "de",
-      "inicio": 37.62,
-      "fim": 37.8
+      "inicio": 18.66,
+      "fim": 19.16
     },
     {
-      "texto": "espera,",
-      "inicio": 37.8,
-      "fim": 38.14
+      "texto": "desacelerar.",
+      "inicio": 19.16,
+      "fim": 20.34
     },
     {
-      "texto": "hora",
-      "inicio": 38.4,
-      "fim": 38.56
+      "texto": "A",
+      "inicio": 20.58,
+      "fim": 20.98
+    },
+    {
+      "texto": "estrela",
+      "inicio": 20.98,
+      "fim": 21.4
+    },
+    {
+      "texto": "tátil",
+      "inicio": 21.4,
+      "fim": 21.82
+    },
+    {
+      "texto": "vira",
+      "inicio": 21.82,
+      "fim": 22.1
+    },
+    {
+      "texto": "uma",
+      "inicio": 22.1,
+      "fim": 22.32
+    },
+    {
+      "texto": "ferramenta",
+      "inicio": 22.32,
+      "fim": 22.8
+    },
+    {
+      "texto": "de",
+      "inicio": 22.8,
+      "fim": 23.18
+    },
+    {
+      "texto": "autorregulação.",
+      "inicio": 23.18,
+      "fim": 24.1
+    },
+    {
+      "texto": "A",
+      "inicio": 24.46,
+      "fim": 24.66
+    },
+    {
+      "texto": "criança",
+      "inicio": 24.66,
+      "fim": 25.0
+    },
+    {
+      "texto": "aprende",
+      "inicio": 25.0,
+      "fim": 25.64
+    },
+    {
+      "texto": "que,",
+      "inicio": 25.64,
+      "fim": 26.14
+    },
+    {
+      "texto": "quando",
+      "inicio": 26.34,
+      "fim": 26.78
+    },
+    {
+      "texto": "a",
+      "inicio": 26.78,
+      "fim": 27.04
+    },
+    {
+      "texto": "agitação",
+      "inicio": 27.04,
+      "fim": 27.68
+    },
+    {
+      "texto": "sobe,",
+      "inicio": 27.68,
+      "fim": 28.12
+    },
+    {
+      "texto": "existe",
+      "inicio": 28.12,
+      "fim": 28.7
+    },
+    {
+      "texto": "algo",
+      "inicio": 28.7,
+      "fim": 29.04
+    },
+    {
+      "texto": "que",
+      "inicio": 29.04,
+      "fim": 29.32
+    },
+    {
+      "texto": "ela",
+      "inicio": 29.32,
+      "fim": 29.58
+    },
+    {
+      "texto": "mesmo",
+      "inicio": 29.58,
+      "fim": 29.86
+    },
+    {
+      "texto": "pode",
+      "inicio": 29.86,
+      "fim": 30.18
+    },
+    {
+      "texto": "fazer",
+      "inicio": 30.18,
+      "fim": 30.56
+    },
+    {
+      "texto": "para",
+      "inicio": 30.56,
+      "fim": 30.88
+    },
+    {
+      "texto": "se",
+      "inicio": 30.88,
+      "fim": 31.14
+    },
+    {
+      "texto": "acalmar.",
+      "inicio": 31.14,
+      "fim": 32.46
+    },
+    {
+      "texto": "Para",
+      "inicio": 32.7,
+      "fim": 33.08
+    },
+    {
+      "texto": "mexer",
+      "inicio": 33.08,
+      "fim": 34.0
+    },
+    {
+      "texto": "nas",
+      "inicio": 34.0,
+      "fim": 34.32
+    },
+    {
+      "texto": "pontinhas,",
+      "inicio": 34.32,
+      "fim": 34.9
+    },
+    {
+      "texto": "ela",
+      "inicio": 35.14,
+      "fim": 35.24
+    },
+    {
+      "texto": "usa",
+      "inicio": 35.24,
+      "fim": 35.48
+    },
+    {
+      "texto": "as",
+      "inicio": 35.48,
+      "fim": 35.74
+    },
+    {
+      "texto": "pinças",
+      "inicio": 35.74,
+      "fim": 36.08
+    },
+    {
+      "texto": "dos",
+      "inicio": 36.08,
+      "fim": 36.38
+    },
+    {
+      "texto": "dedos",
+      "inicio": 36.38,
+      "fim": 36.96
+    },
+    {
+      "texto": "e",
+      "inicio": 36.96,
+      "fim": 37.28
+    },
+    {
+      "texto": "as",
+      "inicio": 37.28,
+      "fim": 37.52
+    },
+    {
+      "texto": "duas",
+      "inicio": 37.52,
+      "fim": 37.76
+    },
+    {
+      "texto": "mãos",
+      "inicio": 37.76,
+      "fim": 38.04
+    },
+    {
+      "texto": "ao",
+      "inicio": 38.04,
+      "fim": 38.24
+    },
+    {
+      "texto": "mesmo",
+      "inicio": 38.24,
+      "fim": 38.64
+    },
+    {
+      "texto": "tempo.",
+      "inicio": 38.64,
+      "fim": 39.0
+    },
+    {
+      "texto": "A",
+      "inicio": 39.16,
+      "fim": 39.4
+    },
+    {
+      "texto": "mesma",
+      "inicio": 39.4,
+      "fim": 39.72
+    },
+    {
+      "texto": "base",
+      "inicio": 39.72,
+      "fim": 40.08
+    },
+    {
+      "texto": "que",
+      "inicio": 40.08,
+      "fim": 40.34
+    },
+    {
+      "texto": "ela",
+      "inicio": 40.34,
+      "fim": 40.6
+    },
+    {
+      "texto": "usa",
+      "inicio": 40.6,
+      "fim": 40.78
+    },
+    {
+      "texto": "para",
+      "inicio": 40.78,
+      "fim": 41.12
+    },
+    {
+      "texto": "segurar",
+      "inicio": 41.12,
+      "fim": 41.64
+    },
+    {
+      "texto": "o",
+      "inicio": 41.64,
+      "fim": 41.82
+    },
+    {
+      "texto": "lápis,",
+      "inicio": 41.82,
+      "fim": 42.32
+    },
+    {
+      "texto": "abotuar",
+      "inicio": 42.54,
+      "fim": 42.88
+    },
+    {
+      "texto": "o",
+      "inicio": 42.88,
+      "fim": 43.02
+    },
+    {
+      "texto": "botão",
+      "inicio": 43.02,
+      "fim": 43.28
     },
     {
       "texto": "da",
-      "inicio": 38.56,
-      "fim": 38.68
+      "inicio": 43.28,
+      "fim": 43.56
     },
     {
-      "texto": "tarefa.",
-      "inicio": 38.68,
-      "fim": 39.3
+      "texto": "roupa",
+      "inicio": 43.56,
+      "fim": 44.06
     },
     {
-      "texto": "Brincar",
-      "inicio": 39.74,
-      "fim": 40.14
+      "texto": "e",
+      "inicio": 44.06,
+      "fim": 44.3
     },
     {
-      "texto": "também",
-      "inicio": 40.14,
-      "fim": 40.44
+      "texto": "usar",
+      "inicio": 44.3,
+      "fim": 44.7
+    },
+    {
+      "texto": "a",
+      "inicio": 44.7,
+      "fim": 44.82
+    },
+    {
+      "texto": "tesoura.",
+      "inicio": 44.82,
+      "fim": 45.48
+    },
+    {
+      "texto": "E",
+      "inicio": 45.6,
+      "fim": 45.9
+    },
+    {
+      "texto": "ainda",
+      "inicio": 45.9,
+      "fim": 46.16
+    },
+    {
+      "texto": "vira",
+      "inicio": 46.16,
+      "fim": 46.5
+    },
+    {
+      "texto": "uma",
+      "inicio": 46.5,
+      "fim": 46.74
+    },
+    {
+      "texto": "brincadeira.",
+      "inicio": 46.74,
+      "fim": 47.4
+    },
+    {
+      "texto": "Por",
+      "inicio": 47.48,
+      "fim": 47.72
+    },
+    {
+      "texto": "ser",
+      "inicio": 47.72,
+      "fim": 48.08
+    },
+    {
+      "texto": "estrela",
+      "inicio": 48.08,
+      "fim": 48.6
+    },
+    {
+      "texto": "do",
+      "inicio": 48.6,
+      "fim": 48.86
+    },
+    {
+      "texto": "mar,",
+      "inicio": 48.86,
+      "fim": 49.22
+    },
+    {
+      "texto": "ela",
+      "inicio": 49.62,
+      "fim": 49.86
     },
     {
       "texto": "é",
-      "inicio": 40.44,
-      "fim": 40.56
+      "inicio": 49.86,
+      "fim": 50.1
     },
     {
-      "texto": "cuidar.",
-      "inicio": 40.56,
-      "fim": 41.02
+      "texto": "silenciosa",
+      "inicio": 50.1,
+      "fim": 50.94
     },
     {
-      "texto": "O",
-      "inicio": 41.24,
-      "fim": 41.28
+      "texto": "e",
+      "inicio": 50.94,
+      "fim": 51.26
     },
     {
-      "texto": "link",
-      "inicio": 41.28,
-      "fim": 41.44
-    },
-    {
-      "texto": "está",
-      "inicio": 41.44,
-      "fim": 41.66
+      "texto": "cabe",
+      "inicio": 51.26,
+      "fim": 51.52
     },
     {
       "texto": "na",
-      "inicio": 41.66,
-      "fim": 41.8
+      "inicio": 51.52,
+      "fim": 51.74
+    },
+    {
+      "texto": "mochila.",
+      "inicio": 51.74,
+      "fim": 52.46
+    },
+    {
+      "texto": "Escola,",
+      "inicio": 52.82,
+      "fim": 53.32
+    },
+    {
+      "texto": "sala",
+      "inicio": 53.38,
+      "fim": 53.68
+    },
+    {
+      "texto": "de",
+      "inicio": 53.68,
+      "fim": 54.1
+    },
+    {
+      "texto": "espera,",
+      "inicio": 54.1,
+      "fim": 54.38
+    },
+    {
+      "texto": "hora",
+      "inicio": 54.58,
+      "fim": 54.84
+    },
+    {
+      "texto": "da",
+      "inicio": 54.84,
+      "fim": 55.2
+    },
+    {
+      "texto": "tarefa,",
+      "inicio": 55.2,
+      "fim": 55.92
+    },
+    {
+      "texto": "brincar",
+      "inicio": 56.28,
+      "fim": 56.72
+    },
+    {
+      "texto": "também",
+      "inicio": 56.72,
+      "fim": 57.12
+    },
+    {
+      "texto": "é",
+      "inicio": 57.12,
+      "fim": 57.34
+    },
+    {
+      "texto": "cuidar.",
+      "inicio": 57.34,
+      "fim": 57.76
+    },
+    {
+      "texto": "Quer",
+      "inicio": 57.76,
+      "fim": 58.26
+    },
+    {
+      "texto": "ajudar",
+      "inicio": 58.26,
+      "fim": 58.66
+    },
+    {
+      "texto": "seu",
+      "inicio": 58.66,
+      "fim": 58.94
+    },
+    {
+      "texto": "filho?",
+      "inicio": 58.94,
+      "fim": 59.34
+    },
+    {
+      "texto": "O",
+      "inicio": 59.58,
+      "fim": 59.64
+    },
+    {
+      "texto": "link",
+      "inicio": 59.64,
+      "fim": 59.84
+    },
+    {
+      "texto": "está",
+      "inicio": 59.84,
+      "fim": 60.1
+    },
+    {
+      "texto": "na",
+      "inicio": 60.1,
+      "fim": 60.3
     },
     {
       "texto": "bio.",
-      "inicio": 41.8,
-      "fim": 42.04
+      "inicio": 60.3,
+      "fim": 60.5
     }
   ]
 }

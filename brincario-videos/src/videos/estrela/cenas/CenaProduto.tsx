@@ -19,7 +19,7 @@ export const CenaProduto: React.FC = () => {
   const t = frame / fps;
 
   const tMar = quando("mar");
-  const tE = quando("e", tMar); // "É silenciosa"
+  const tE = quando("ela", tMar); // "ela é silenciosa"
   const tSilenciosa = quando("silenciosa");
   const tMochila = quando("mochila");
   const tEscola = quando("escola");

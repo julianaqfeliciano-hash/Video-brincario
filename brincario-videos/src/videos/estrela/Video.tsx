@@ -31,7 +31,7 @@ export const Video: React.FC<PropsVideo> = (props) => (
   <VideoBase
     video={midia.fala}
     palavras={palavras}
-    recorteY="50%"
+    recorteY="52%" // rosto no cartão e marca d'água do teleprompter fora do recorte
     fundo={
       <>
         <Floresta virada={VIRADA} />

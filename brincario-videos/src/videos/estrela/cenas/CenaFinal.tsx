@@ -5,14 +5,15 @@ import { Capivara } from "../../../brincario/componentes/Capivara";
 import { CartaoFinal } from "../../../brincario/componentes/CartaoFinal";
 import { quando, salto } from "../dados";
 
-// ROTEIRO.md, cena 16: "Brincar também é cuidar. O link está na bio."
+// ROTEIRO.md, cena 16: "Brincar também é cuidar. Quer ajudar seu filho? O link está na bio."
 // Cartão final: frase da marca, botão "Link na bio" e @brincario.loja, com a capivara acenando.
 
 export const CenaFinal: React.FC = () => {
   const frame = useCurrentFrame();
   const tBrincar = quando("brincar");
   const tCuidar = quando("cuidar", tBrincar);
-  const tLink = quando("link", tCuidar);
+  const tQuer = quando("quer", tCuidar);
+  const tLink = quando("link", tQuer);
   const tBio = quando("bio", tLink);
   const eCapivara = salto(frame, tCuidar);
   const aceno = Math.sin(frame / 4) * 18;
@@ -23,6 +24,8 @@ export const CenaFinal: React.FC = () => {
         tDestaque={tCuidar}
         tBotao={tLink}
         tArroba={tBio}
+        pergunta="Quer ajudar seu filho?"
+        tPergunta={tQuer}
       />
       <Cena inicio={tCuidar} fim={9999}>
         <svg

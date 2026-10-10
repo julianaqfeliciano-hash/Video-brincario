@@ -4,15 +4,35 @@ import {
   duracaoTrechos,
   type Trecho,
 } from "../../brincario/Anuncio";
+import { fps } from "../../brincario/tema";
+import { quando } from "./dados";
 import { Video } from "./Video";
 
-// Versão curta (15 s) para anúncio: gancho + estrela + benefícios + cartão final.
-// Quadros do vídeo completo; cada trecho começa no quadro da primeira palavra.
-const TRECHOS: Trecho[] = [
-  { de: 0, ate: 101 }, // "Seu filho não para de mexer as mãos? Calma, isso tem explicação."
-  { de: 397, ate: 480 }, // "A estrela tátil vira uma ferramenta de autorregulação."
-  { de: 958, ate: 1224 }, // "É silenciosa... Brincar também é cuidar. O link está na bio." + cartão parado
-];
+// Versão curta (15 s = 450 quadros) para anúncio: gancho + estrela + "silenciosa e cabe na mochila"
+// + cartão final.
+// Calculada pelas palavras: cada trecho começa no quadro da primeira palavra e termina antes da
+// próxima frase; o último segura o cartão final até completar 15 s.
+const TOTAL = 15 * fps;
+const inicioEm = (t: number) => Math.ceil(t * fps);
+const antesDe = (t: number) => Math.floor(t * fps) - 1;
+
+const gancho: Trecho = { de: 0, ate: antesDe(quando("eu")) }; // "Seu filho... tem uma explicação."
+const tEstrela = quando("a", quando("desacelerar"));
+const estrela: Trecho = {
+  de: inicioEm(tEstrela), // "A estrela tátil vira uma ferramenta de autorregulação."
+  ate: antesDe(quando("a", quando("autorregulacao"))),
+};
+const tEla = quando("ela", quando("mar"));
+const beneficios: Trecho = {
+  de: inicioEm(tEla), // "ela é silenciosa e cabe na mochila."
+  ate: antesDe(quando("escola", tEla)),
+};
+const deFinal = inicioEm(quando("brincar", tEla)); // "brincar também é cuidar... O link está na bio."
+const final: Trecho = {
+  de: deFinal,
+  ate: deFinal + TOTAL - duracaoTrechos([gancho, estrela, beneficios]),
+};
+const TRECHOS: Trecho[] = [gancho, estrela, beneficios, final];
 
 export const duracaoAnuncio = duracaoTrechos(TRECHOS);
 

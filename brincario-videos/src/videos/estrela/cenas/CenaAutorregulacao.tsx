@@ -58,7 +58,7 @@ export const CenaAutorregulacao: React.FC = () => {
   const tAlgo = quando("algo", tSobe);
   const tFazer = quando("fazer", tAlgo);
   const tAcalmar = quando("acalmar", tFazer);
-  const tFim = quando("ao", tAcalmar) - 0.1;
+  const tFim = quando("para", tAcalmar) - 0.1; // até "Para mexer nas pontinhas"
 
   const eRotulo = entrada(frame, tCrianca);
   const e1 = salto(frame, tAgitacao);

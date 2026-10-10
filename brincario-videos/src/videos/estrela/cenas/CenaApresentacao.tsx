@@ -86,7 +86,7 @@ export const CenaApresentacao: React.FC = () => {
             transform: `translateY(${24 * (1 - eRotulo)}px)`,
           }}
         >
-          PSICÓLOGA INFANTIL
+          PSICÓLOGA INFANTO-JUVENIL
         </div>
       </div>
     </Cena>
