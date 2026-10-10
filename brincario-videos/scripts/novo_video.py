@@ -149,6 +149,7 @@ def cortar(a):
         PY, "scripts/aplicar_cortes.py", origem["fala"], pub / "transcricao.json", pub / "cortes.json",
         pub / "fala_cortada.mp4", pub / "fala_cortada.json",
         "--velocidade", str(a.velocidade), *(["--filtro", a.filtro] if a.filtro else []),
+        "--suave", str(a.suave),
     )
 
 
@@ -164,6 +165,7 @@ p.set_defaults(func=preparar)
 c = sub.add_parser("cortar")
 c.add_argument("slug")
 c.add_argument("--velocidade", type=float, default=1.0, help="ex.: 1.15 para fala lenta")
+c.add_argument("--suave", type=float, default=0.1, help="fusão (s) entre trechos cortados; 0 = corte seco")
 c.add_argument("--filtro", default="", help='tratamento de imagem, ex.: "eq=contrast=1.08:saturation=1.15"')
 c.set_defaults(func=cortar)
 
