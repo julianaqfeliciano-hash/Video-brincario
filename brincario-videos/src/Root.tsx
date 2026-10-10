@@ -19,7 +19,7 @@ export const RemotionRoot: React.FC = () => {
         id="Estrela"
         component={Estrela.Video}
         durationInFrames={Estrela.duracaoVideo}
-        defaultProps={{ guias: false, semVideo: false }}
+        defaultProps={{ guias: false, semVideo: false, soFundo: false }}
         {...formato}
       />
       <Composition

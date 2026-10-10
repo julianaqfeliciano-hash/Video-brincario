@@ -11,6 +11,8 @@ export type PropsVideo = {
   guias?: boolean;
   // Esconde o vídeo da fala (conferência automática das zonas: scripts/verificar_zonas.py)
   semVideo?: boolean;
+  // Só o cenário de fundo, sem cenas, fala e legendas (referência da conferência das zonas)
+  soFundo?: boolean;
 };
 
 /**
@@ -22,6 +24,7 @@ export const VideoBase: React.FC<
     video: string; // caminho em public/ da fala cortada
     palavras: Palavra[];
     recorteY?: string; // ajuste vertical do rosto no cartão
+    fundo?: React.ReactNode; // cenário próprio (ex.: <Floresta />); padrão: fundo creme alegre
     children?: React.ReactNode;
   }
 > = ({
@@ -30,13 +33,19 @@ export const VideoBase: React.FC<
   recorteY = "50%",
   guias = false,
   semVideo = false,
+  soFundo = false,
+  fundo,
   children,
 }) => (
   <AbsoluteFill style={{ backgroundColor: cores.creme }}>
-    <FundoAlegre />
-    {children}
-    <CartaoFala video={video} recorteY={recorteY} semVideo={semVideo} />
-    <Legendas palavras={palavras} />
+    {fundo ?? <FundoAlegre />}
+    {!soFundo && (
+      <>
+        {children}
+        <CartaoFala video={video} recorteY={recorteY} semVideo={semVideo} />
+        <Legendas palavras={palavras} />
+      </>
+    )}
     {guias && <Guias />}
   </AbsoluteFill>
 );

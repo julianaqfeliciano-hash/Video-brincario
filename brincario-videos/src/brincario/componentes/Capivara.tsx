@@ -23,6 +23,18 @@ export const corCapivara = {
 };
 
 const C = corCapivara;
+const CORPO =
+  "M0 -172 C96 -172 132 -112 134 -30 C138 60 142 128 112 156 C80 178 -80 178 -112 156 C-142 128 -138 60 -134 -30 C-132 -112 -96 -172 0 -172 Z";
+
+// Uniforme de escoteiro (inspirado em escoteiros mirins; sem emblemas de personagens)
+export const corEscoteiro = {
+  caqui: "#E3C88E",
+  caquiEscuro: "#C6A766",
+  lenco: "#F28C28",
+  faixa: "#6E7D3A",
+  bermuda: "#7A5532",
+};
+const E = corEscoteiro;
 const LINHA = 6;
 const BOCA = "#7A1F3D";
 
@@ -31,10 +43,11 @@ const dir = (graus: number, lado: 1 | -1) => {
   return { x: Math.sin(a) * lado, y: Math.cos(a) };
 };
 
-const Braco: React.FC<{ lado: 1 | -1; braco: BracoCapivara }> = ({
-  lado,
-  braco,
-}) => {
+const Braco: React.FC<{
+  lado: 1 | -1;
+  braco: BracoCapivara;
+  manga: boolean;
+}> = ({ lado, braco, manga }) => {
   const ombro = { x: 100 * lado, y: 0 };
   const d1 = dir(braco.ombro, lado);
   const cot = { x: ombro.x + 46 * d1.x, y: ombro.y + 46 * d1.y };
@@ -45,6 +58,20 @@ const Braco: React.FC<{ lado: 1 | -1; braco: BracoCapivara }> = ({
     <g strokeLinecap="round" strokeLinejoin="round" fill="none">
       <path d={caminho} stroke={C.contorno} strokeWidth={40 + LINHA * 2} />
       <path d={caminho} stroke={C.corpo} strokeWidth={40} />
+      {manga && (
+        <>
+          <path
+            d={`M${ombro.x} ${ombro.y} L${ombro.x + 18 * d1.x} ${ombro.y + 18 * d1.y}`}
+            stroke={C.contorno}
+            strokeWidth={46 + LINHA * 2}
+          />
+          <path
+            d={`M${ombro.x} ${ombro.y} L${ombro.x + 18 * d1.x} ${ombro.y + 18 * d1.y}`}
+            stroke={E.caqui}
+            strokeWidth={46}
+          />
+        </>
+      )}
       <ellipse
         cx={pata.x}
         cy={pata.y}
@@ -63,6 +90,163 @@ const Braco: React.FC<{ lado: 1 | -1; braco: BracoCapivara }> = ({
   );
 };
 
+const INSIGNIAS = [
+  cores.amarelo,
+  cores.azul,
+  cores.terracota,
+  cores.salvia,
+  cores.lilas,
+  cores.rosa,
+];
+
+/** Camisa cáqui, bermuda com cinto e faixa de insígnias, recortadas no formato do corpo. */
+const Uniforme: React.FC<{ idClip: string }> = ({ idClip }) => (
+  <g>
+    <clipPath id={idClip}>
+      <path d={CORPO} />
+    </clipPath>
+    <g clipPath={`url(#${idClip})`}>
+      <rect x={-150} y={2} width={300} height={118} fill={E.caqui} />
+      <path d="M0 2 V118" stroke={E.caquiEscuro} strokeWidth={4} />
+      {[34, 62, 90].map((by) => (
+        <circle
+          key={by}
+          cx={0}
+          cy={by}
+          r={5}
+          fill={E.caquiEscuro}
+          stroke={C.contorno}
+          strokeWidth={2}
+        />
+      ))}
+      {[-1, 1].map((lado) => (
+        <g key={lado}>
+          <rect
+            x={lado === -1 ? -98 : 46}
+            y={36}
+            width={52}
+            height={42}
+            rx={8}
+            fill={E.caqui}
+            stroke={E.caquiEscuro}
+            strokeWidth={4}
+          />
+          <path
+            d={`M${lado === -1 ? -98 : 46} 50 H${lado === -1 ? -46 : 98}`}
+            stroke={E.caquiEscuro}
+            strokeWidth={4}
+          />
+        </g>
+      ))}
+      <rect x={-150} y={114} width={300} height={80} fill={E.bermuda} />
+      <rect
+        x={-150}
+        y={110}
+        width={300}
+        height={14}
+        fill={C.contorno}
+        opacity={0.75}
+      />
+      <rect
+        x={-14}
+        y={108}
+        width={28}
+        height={18}
+        rx={4}
+        fill={cores.amarelo}
+        stroke={C.contorno}
+        strokeWidth={3}
+      />
+      {/* Faixa de insígnias, do ombro esquerdo ao quadril direito */}
+      <path d="M-150 -6 L150 150" stroke={C.contorno} strokeWidth={46} />
+      <path d="M-150 -6 L150 150" stroke={E.faixa} strokeWidth={38} />
+      {INSIGNIAS.map((cor, i) => {
+        const t = 0.2 + i * 0.12;
+        return (
+          <circle
+            key={i}
+            cx={-150 + 300 * t}
+            cy={-6 + 156 * t}
+            r={11}
+            fill={cor}
+            stroke={C.contorno}
+            strokeWidth={3}
+          />
+        );
+      })}
+    </g>
+    <path
+      d={CORPO}
+      fill="none"
+      stroke={C.contorno}
+      strokeWidth={LINHA}
+      strokeLinejoin="round"
+    />
+  </g>
+);
+
+/** Boné cáqui com aba e broche de estrela. */
+const Bone: React.FC = () => (
+  <g strokeLinejoin="round">
+    <path
+      d="M-96 -146 C-96 -214 96 -214 96 -146 Z"
+      fill={E.caqui}
+      stroke={C.contorno}
+      strokeWidth={LINHA}
+    />
+    <path
+      d="M-20 -200 Q0 -206 20 -200"
+      stroke={E.caquiEscuro}
+      strokeWidth={4}
+      fill="none"
+    />
+    <path
+      d="M-110 -146 Q0 -124 110 -146 Q100 -134 0 -128 Q-100 -134 -110 -146 Z"
+      fill={E.caquiEscuro}
+      stroke={C.contorno}
+      strokeWidth={5}
+    />
+    <circle
+      cx={0}
+      cy={-168}
+      r={15}
+      fill={E.lenco}
+      stroke={C.contorno}
+      strokeWidth={4}
+    />
+    <path
+      d="M0 -178 L3 -171 L10 -170 L5 -165 L6 -158 L0 -162 L-6 -158 L-5 -165 L-10 -170 L-3 -171 Z"
+      fill={cores.amarelo}
+    />
+  </g>
+);
+
+/** Lenço laranja no pescoço com anel. */
+const Lenco: React.FC = () => (
+  <g strokeLinejoin="round">
+    <path
+      d="M-74 0 Q0 18 74 0 L10 78 Q0 86 -10 78 Z"
+      fill={E.lenco}
+      stroke={C.contorno}
+      strokeWidth={5}
+    />
+    <path
+      d="M-30 6 L-40 34 M30 6 L40 34"
+      stroke={C.contorno}
+      strokeWidth={3}
+      opacity={0.35}
+    />
+    <circle
+      cx={0}
+      cy={18}
+      r={13}
+      fill={E.caquiEscuro}
+      stroke={C.contorno}
+      strokeWidth={4}
+    />
+  </g>
+);
+
 export const Capivara: React.FC<{
   x: number;
   y: number;
@@ -73,6 +257,7 @@ export const Capivara: React.FC<{
   olhar?: { x: number; y: number }; // -1..1, só com olhos abertos
   inclinacao?: number; // graus
   segura?: React.ReactNode;
+  escoteiro?: boolean; // uniforme de escoteiro (padrão da mascote)
 }> = ({
   x,
   y,
@@ -83,7 +268,9 @@ export const Capivara: React.FC<{
   olhar = { x: 0, y: 0 },
   inclinacao = 0,
   segura,
+  escoteiro = true,
 }) => {
+  const idClip = `corpo-${React.useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const frame = useCurrentFrame();
   const agitada = expressao === "agitada";
   const surpresa = expressao === "surpresa";
@@ -210,13 +397,14 @@ export const Capivara: React.FC<{
       ))}
       {/* Corpo */}
       <path
-        d="M0 -172 C96 -172 132 -112 134 -30 C138 60 142 128 112 156 C80 178 -80 178 -112 156 C-142 128 -138 60 -134 -30 C-132 -112 -96 -172 0 -172 Z"
+        d={CORPO}
         fill={C.corpo}
         stroke={C.contorno}
         strokeWidth={LINHA}
         strokeLinejoin="round"
       />
       <ellipse cx={0} cy={78} rx={86} ry={82} fill={C.barriga} opacity={0.85} />
+      {escoteiro && <Uniforme idClip={idClip} />}
       {/* Topetinho e pelinhos */}
       <path
         d="M-14 -170 Q-8 -192 0 -172 Q8 -194 16 -170"
@@ -242,6 +430,8 @@ export const Capivara: React.FC<{
         />
       ))}
 
+      {escoteiro && <Bone />}
+
       {/* Rosto */}
       <ellipse
         cx={-88}
@@ -263,7 +453,7 @@ export const Capivara: React.FC<{
         [-1, 1].map((lado) => (
           <path
             key={lado}
-            d={`M${76 * lado} -134 L${38 * lado} -144`}
+            d={`M${74 * lado} -122 L${40 * lado} -130`}
             stroke={C.contorno}
             strokeWidth={6}
             strokeLinecap="round"
@@ -326,10 +516,12 @@ export const Capivara: React.FC<{
         />
       )}
 
+      {escoteiro && <Lenco />}
+
       {/* Objeto segurado + patas por cima */}
       {segura && <g transform="translate(0 40)">{segura}</g>}
-      <Braco lado={-1} braco={bracoEsq} />
-      <Braco lado={1} braco={bracoDir} />
+      <Braco lado={-1} braco={bracoEsq} manga={escoteiro} />
+      <Braco lado={1} braco={bracoDir} manga={escoteiro} />
     </g>
   );
 };

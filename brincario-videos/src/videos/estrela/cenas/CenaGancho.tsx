@@ -3,7 +3,7 @@ import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
 import { Brilho, Estalo } from "../../../brincario/componentes/Enfeites";
 import { Capivara } from "../../../brincario/componentes/Capivara";
-import { cores, fonte, fps } from "../../../brincario/tema";
+import { cores, fonte, fps, textoClaro } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cenas 1–2: "Seu filho não para de mexer as mãos? Calma, isso tem explicação."
@@ -27,7 +27,7 @@ export const CenaGancho: React.FC = () => {
   const corMaos = interpolateColors(
     entrada(frame, tMaos, { damping: 20, stiffness: 160 }),
     [0, 1],
-    [cores.texto, cores.terracota],
+    [cores.branco, cores.terracota],
   );
   const sublinhado = entrada(frame, tMaos);
   const calma = entrada(frame, tCalma, { damping: 26, stiffness: 40 });
@@ -115,7 +115,7 @@ export const CenaGancho: React.FC = () => {
           fontWeight: 900,
           fontSize: 76,
           lineHeight: 1.08,
-          color: cores.texto,
+          ...textoClaro,
           isolation: "isolate",
         }}
       >

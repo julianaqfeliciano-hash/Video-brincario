@@ -1,7 +1,7 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
-import { cores, fonte } from "../../../brincario/tema";
+import { cores, fonte, textoClaro } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 3: "Eu sou a Juliana, psicóloga infantil."
@@ -62,7 +62,7 @@ export const CenaApresentacao: React.FC = () => {
             fontWeight: 900,
             fontSize: 120,
             lineHeight: 1,
-            color: cores.texto,
+            ...textoClaro,
             opacity: eNome,
             transform: `translateY(${24 * (1 - eNome)}px)`,
           }}
@@ -76,7 +76,8 @@ export const CenaApresentacao: React.FC = () => {
             fontWeight: 700,
             fontSize: 36,
             letterSpacing: "0.14em",
-            color: cores.salviaEscura,
+            ...textoClaro,
+            WebkitTextStroke: "7px #2B2350",
             opacity: eRotulo,
             transform: `translateY(${24 * (1 - eRotulo)}px)`,
           }}

@@ -25,6 +25,13 @@ export const cores = {
 
 export const fonte = "Nunito";
 
+// Texto branco com contorno índigo: legível sobre fundos escuros (ex.: floresta na chuva)
+export const textoClaro = {
+  color: "#FFFFFF",
+  WebkitTextStroke: "10px #2B2350",
+  paintOrder: "stroke fill",
+} as const;
+
 for (const peso of ["700", "800", "900"]) {
   loadFont({
     family: fonte,

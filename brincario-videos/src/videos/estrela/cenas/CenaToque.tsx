@@ -160,7 +160,11 @@ export const CenaToque: React.FC = () => {
           fontWeight={700}
           fontSize={28}
           letterSpacing={3.4}
-          fill={cores.salviaEscura}
+          fill={cores.branco}
+          stroke={cores.texto}
+          strokeWidth={8}
+          paintOrder="stroke"
+          strokeLinejoin="round"
           opacity={eIlustracao}
         >
           O QUE ACONTECE POR DENTRO
@@ -266,7 +270,11 @@ export const CenaToque: React.FC = () => {
             fontWeight={700}
             fontSize={28}
             letterSpacing={3.4}
-            fill={cores.salviaEscura}
+            fill={cores.branco}
+            stroke={cores.texto}
+            strokeWidth={8}
+            paintOrder="stroke"
+            strokeLinejoin="round"
           >
             AGITAÇÃO
           </text>
