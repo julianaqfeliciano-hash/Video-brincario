@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { Teste } from "./Teste";
 import * as Estrela from "./videos/estrela";
+import * as GiroAutorregulacao from "./videos/giro-autorregulacao";
 // novo_video.py: importações
 
 // Vídeos verticais: 1080x1920 (9:16), 30 fps
@@ -26,6 +27,19 @@ export const RemotionRoot: React.FC = () => {
         id="EstrelaAnuncio15s"
         component={Estrela.Anuncio}
         durationInFrames={Estrela.duracaoAnuncio}
+        {...formato}
+      />
+      <Composition
+        id="GiroAutorregulacao"
+        component={GiroAutorregulacao.Video}
+        durationInFrames={GiroAutorregulacao.duracaoVideo}
+        defaultProps={{ guias: false, semVideo: false }}
+        {...formato}
+      />
+      <Composition
+        id="GiroAutorregulacaoAnuncio15s"
+        component={GiroAutorregulacao.Anuncio}
+        durationInFrames={GiroAutorregulacao.duracaoAnuncio}
         {...formato}
       />
       {/* novo_video.py: composições */}
