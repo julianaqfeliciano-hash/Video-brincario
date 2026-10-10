@@ -7,7 +7,9 @@ export const CartaoFala: React.FC<{
   video: string;
   // Posição vertical do recorte (0% = topo do vídeo, 100% = base); ajusta onde o rosto fica no cartão
   recorteY?: string;
-}> = ({ video, recorteY = "50%" }) => {
+  // Esconde o vídeo (usado na conferência das zonas seguras: sobra só o que é gráfico/texto)
+  semVideo?: boolean;
+}> = ({ video, recorteY = "50%", semVideo = false }) => {
   const { x, y, largura, altura, raio } = layout.cartao;
   return (
     <div
@@ -22,15 +24,17 @@ export const CartaoFala: React.FC<{
         boxShadow: "0 20px 60px rgba(59,51,46,0.18)",
       }}
     >
-      <OffthreadVideo
-        src={staticFile(video)}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: `50% ${recorteY}`,
-        }}
-      />
+      {!semVideo && (
+        <OffthreadVideo
+          src={staticFile(video)}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: `50% ${recorteY}`,
+          }}
+        />
+      )}
     </div>
   );
 };

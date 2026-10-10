@@ -20,7 +20,10 @@ const SEGUNDOS_FINAIS = 1;
 
 export const duracaoEstrela = Math.ceil((transcricao.duracao + SEGUNDOS_FINAIS) * fps);
 
-export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) => {
+export const VideoEstrela: React.FC<{ guias?: boolean; semVideo?: boolean }> = ({
+  guias = false,
+  semVideo = false,
+}) => {
   return (
     <AbsoluteFill style={{ backgroundColor: cores.creme }}>
       {/* Painel de ilustração: cada cena aparece só no seu trecho (ROTEIRO.md) */}
@@ -35,7 +38,7 @@ export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) =
       <CenaProduto />
       <CenaFinal />
 
-      <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" />
+      <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" semVideo={semVideo} />
       <Legendas palavras={transcricao.palavras} />
 
       {guias && <Guias />}

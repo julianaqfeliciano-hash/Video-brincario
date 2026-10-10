@@ -9,7 +9,8 @@ import fs from "node:fs";
 import { Config } from "@remotion/cli/config";
 
 Config.setRspack(true);
-Config.setVideoImageFormat("jpeg");
+// PNG gera o vídeo em yuv420p (faixa de cor padrão); com JPEG sai yuvj420p, que algumas plataformas mostram lavado
+Config.setVideoImageFormat("png");
 Config.setOverwriteOutput(true);
 
 // Neste ambiente o Remotion não consegue baixar o navegador; usa o Chromium já instalado.
