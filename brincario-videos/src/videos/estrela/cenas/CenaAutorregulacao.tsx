@@ -7,11 +7,12 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { Cena } from "../../../brincario/Cena";
+import { Capivara } from "../../../brincario/componentes/Capivara";
 import { cores, fonte, fps } from "../../../brincario/tema";
 import { entrada, midia, quadroDe, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 7: "A criança aprende que quando a agitação sobe, existe algo que ela mesma
-// pode fazer para se acalmar." Fluxo de 3 ícones em círculos ligados por setas.
+// pode fazer para se acalmar." Fluxo de 3 círculos: capivara agitada → estrela → capivara calma.
 
 const Y = 530;
 const R = 100;
@@ -30,8 +31,8 @@ const Seta: React.FC<{ de: number; ate: number; progresso: number }> = ({
   if (progresso <= 0.01) return null;
   return (
     <g
-      stroke={cores.salviaEscura}
-      strokeWidth={6}
+      stroke={cores.texto}
+      strokeWidth={8}
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
@@ -68,17 +69,6 @@ export const CenaAutorregulacao: React.FC = () => {
   const e3 = salto(frame, tAcalmar);
   const destaque3 = entrada(frame, tAcalmar);
 
-  // Onda agitada: amplitude e "altura" crescem em "sobe", e a onda corre
-  const onda: string[] = [];
-  for (let i = 0; i <= 40; i++) {
-    const s = i / 40;
-    const x = XS[0] - 62 + 124 * s;
-    const amp = 14 + 14 * sobe;
-    const y =
-      Y + 22 - 34 * sobe * s + amp * Math.sin(2 * Math.PI * 3.5 * s - t * 10);
-    onda.push(`${x.toFixed(1)},${y.toFixed(1)}`);
-  }
-
   const circulo = (
     x: number,
     p: number,
@@ -91,13 +81,14 @@ export const CenaAutorregulacao: React.FC = () => {
         transform={`translate(${x} ${Y}) scale(${0.6 + 0.4 * p}) translate(${-x} ${-Y})`}
         opacity={Math.min(1, p * 1.5)}
       >
+        <circle cx={x} cy={Y + 8} r={R} fill={cores.texto} />
         <circle
           cx={x}
           cy={Y}
           r={R}
           fill={cores.cremeClaro}
           stroke={borda}
-          strokeWidth={6}
+          strokeWidth={7}
         />
         {conteudo}
         <text
@@ -105,9 +96,13 @@ export const CenaAutorregulacao: React.FC = () => {
           y={Y + R + 64}
           textAnchor="middle"
           fontFamily={fonte}
-          fontWeight={800}
+          fontWeight={900}
           fontSize={40}
-          fill={cores.texto}
+          fill={cores.branco}
+          stroke={cores.texto}
+          strokeWidth={9}
+          paintOrder="stroke"
+          strokeLinejoin="round"
         >
           {rotulo}
         </text>
@@ -122,13 +117,17 @@ export const CenaAutorregulacao: React.FC = () => {
           y={330 + 24 * (1 - eRotulo)}
           textAnchor="middle"
           fontFamily={fonte}
-          fontWeight={700}
-          fontSize={32}
+          fontWeight={900}
+          fontSize={34}
           letterSpacing={4.5}
-          fill={cores.salviaEscura}
+          fill={cores.branco}
+          stroke={cores.texto}
+          strokeWidth={8}
+          paintOrder="stroke"
+          strokeLinejoin="round"
           opacity={eRotulo}
         >
-          A CRIANÇA APRENDE
+          A CAPIVARA APRENDE
         </text>
 
         <Seta de={XS[0] + R + 12} ate={XS[1] - R - 12} progresso={seta1} />
@@ -137,14 +136,15 @@ export const CenaAutorregulacao: React.FC = () => {
         {circulo(
           XS[0],
           e1,
-          cores.salvia,
-          <polyline
-            points={onda.join(" ")}
-            fill="none"
-            stroke={cores.terracota}
-            strokeWidth={8}
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          cores.texto,
+          <Capivara
+            x={XS[0]}
+            y={Y + 14}
+            escala={0.3}
+            expressao="agitada"
+            bracoEsq={{ ombro: 150 + 12 * Math.sin(frame * 0.8), cotovelo: 0 }}
+            bracoDir={{ ombro: 150 - 12 * Math.sin(frame * 0.8), cotovelo: 0 }}
+            inclinacao={(3 + 6 * sobe) * Math.sin(frame * 0.9)}
           />,
           "agitação sobe",
         )}
@@ -152,7 +152,7 @@ export const CenaAutorregulacao: React.FC = () => {
         {circulo(
           XS[1],
           e2,
-          cores.salvia,
+          cores.texto,
           <foreignObject x={XS[1] - 70} y={Y - 70} width={140} height={140}>
             <Img
               src={staticFile(midia.produto)}
@@ -170,24 +170,15 @@ export const CenaAutorregulacao: React.FC = () => {
         {circulo(
           XS[2],
           e3,
-          interpolateColors(destaque3, [0, 1], [cores.salvia, cores.terracota]),
-          <g>
-            <circle cx={XS[2]} cy={Y} r={58} fill={cores.terracotaClara} />
-            <path
-              d={`M${XS[2] - 30} ${Y - 6} q12 10 24 0 M${XS[2] + 6} ${Y - 6} q12 10 24 0`}
-              fill="none"
-              stroke={cores.texto}
-              strokeWidth={5}
-              strokeLinecap="round"
-            />
-            <path
-              d={`M${XS[2] - 18} ${Y + 20} Q${XS[2]} ${Y + 34} ${XS[2] + 18} ${Y + 20}`}
-              fill="none"
-              stroke={cores.texto}
-              strokeWidth={5}
-              strokeLinecap="round"
-            />
-          </g>,
+          interpolateColors(destaque3, [0, 1], [cores.texto, cores.terracota]),
+          <Capivara
+            x={XS[2]}
+            y={Y + 14}
+            escala={0.3}
+            expressao="calma"
+            bracoEsq={{ ombro: -20, cotovelo: -60 }}
+            bracoDir={{ ombro: -20, cotovelo: -60 }}
+          />,
           "se acalma",
         )}
       </svg>

@@ -28,23 +28,29 @@ alarmista. O vídeo deve parecer uma conversa com uma especialista, não uma pro
 
 ## 2. Adaptação para a Brincário
 
-### 2.1 Paleta
+### 2.1 Paleta (versão "viva", aprovada depois do 1º vídeo)
+
+A primeira versão (sálvia/terracota apagados) ficou "sem emoção". A paleta atual mantém os nomes
+dos tokens em `src/brincario/tema.ts`, com tons brilhantes:
 
 | Token | Hex | Uso |
 |---|---|---|
-| `creme` | `#F6EFE3` | Fundo do painel (padrão de todas as cenas) |
-| `cremeClaro` | `#FBF8F2` | Cartões, selos e balões sobre o creme |
-| `salvia` | `#8FA98B` | Ilustrações, ícones, preenchimentos, barras |
-| `salviaEscura` | `#5C7A5E` | Rótulos pequenos, linhas de chamada, contornos |
-| `terracota` | `#C8694A` | **Destaque**: palavra falada na legenda, palavra-chave do título, número grande, pontos de energia |
-| `terracotaClara` | `#E8B39D` | Sombras e fundos de destaque suaves |
-| `texto` | `#3B332E` | Títulos e textos do painel (marrom quase preto, nunca preto puro) |
-| `branco` | `#FFFFFF` | Texto da legenda sobre o vídeo |
+| `creme` | `#FFF3D6` | Fundo amanteigado (fundo da marca) |
+| `cremeClaro` | `#FFFFFF` | Cartões, selos, balões ("adesivos") |
+| `salvia` | `#2EC4A0` | Verde-menta: ilustrações, ícones, barra calma |
+| `salviaEscura` | `#13836B` | Botões e detalhes |
+| `terracota` | `#FF5E3A` | Coral vivo: **o destaque** (palavra falada, palavra-chave, número) |
+| `terracotaClara` | `#FFB59E` | Fundos de destaque suaves |
+| `texto` | `#2B2350` | Índigo escuro: texto e **contorno de tudo** |
+| `amarelo` `lilas` `azul` `rosa` | `#FFC530` `#8E6CFF` `#3DA5FF` `#FF7AB8` | Apoio: confetes, insígnias, pontinhos, grifos |
 
 Regras:
-- No máximo **uma** cor de destaque (terracota) por quadro. O resto fica em sálvia, creme e texto.
-- Terracota sobre creme só em texto grande (título, número, palavra destacada). Para texto pequeno, use `texto` ou `salviaEscura`.
-- O vídeo da apresentadora não leva filtro de cor. Quem dá a identidade é a moldura creme.
+- Destaque de texto continua sendo **um** por quadro (coral); as cores de apoio vão em enfeites e ilustrações.
+- **Estilo "adesivo"**: cartões, selos, círculos e balões brancos com contorno índigo de 5–7 px e
+  sombra sólida deslocada para baixo (`0 7px 0 #2B2350`).
+- Texto sobre cenário (céu, floresta) usa `textoClaro` (branco com contorno índigo de 8–10 px) —
+  lê bem tanto no escuro quanto no claro.
+- O vídeo da apresentadora não leva filtro de cor.
 
 ### 2.2 Tipografia
 
@@ -96,16 +102,27 @@ y=1920  └───────────────────────
 
 ### 2.5 Ilustrações
 
-- **Planas e acolhedoras**: formas simples, cantos sempre arredondados, sem contorno preto (contorno, quando houver, em `salviaEscura`, 4–6 px, pontas redondas). Sem gradientes fortes, sem 3D, sem realismo.
-- Personagens: crianças e adultos estilizados, sem rosto detalhado (no máximo olhos em ponto e um sorriso), com corpo em sálvia ou terracota claro.
+- **Desenho animado com contorno índigo** (5–7 px, pontas redondas), cores chapadas e vivas,
+  olhos com brilho, bochechas rosadas. Sem 3D e sem realismo.
+- **Mascote: a capivara escoteira** (`componentes/Capivara.tsx`) é a protagonista de toda cena com
+  personagem — não usar crianças. Corpo caramelo, focinho largo com nariz escuro, olhos fechados de
+  felicidade, uniforme de escoteiro (boné cáqui com broche de estrela, lenço laranja, camisa cáqui,
+  faixa de insígnias coloridas, bermuda). Expressões: `feliz`, `calma`, `agitada` (olhos abertos,
+  sobrancelhas preocupadas, gotinha de suor), `surpresa`. Ela segura o produto com `segura`.
+- Mãos que tocam o produto são **patinhas de capivara** (almofadinhas rosa nas pontas).
+- **Cenário com história** (`componentes/Floresta.tsx`): floresta triste e chuvosa (chuva, árvores
+  secas, neblina, olhinhos no mato) até o produto aparecer; na virada (`virada`, em s) a chuva para,
+  as nuvens abrem, nasce o sol e tudo fica verde e alegre. Na apresentação de quem fala, o fundo da
+  marca cobre o cenário (`FundoMarca`). Relâmpago só como clarão dentro das nuvens, nunca a tela toda.
 - Vocabulário que substitui o da referência:
   - **número grande** que conta, para dados como "3 em cada 5" ou "2 mãos" ou "+5 usos";
   - **ícones em círculos** ligados por setas, para causa e efeito ("toque → acalma → foca");
   - **linhas de chamada** com rótulo para mostrar partes do produto ou do corpo (mão, dedos, "pinça");
   - **barras e medidores** que sobem ou descem ("agitação", "foco");
-  - **selos** (pílulas creme-claro com ícone sálvia) para benefícios;
+  - **selos** (pílulas brancas "adesivo" com ícone num círculo colorido) para benefícios;
   - **trechos de b-roll** em moldura arredondada, com zoom lento;
-  - **foto do produto** recortada sobre o creme, com sombra suave.
+  - **foto do produto** recortada, flutuando ou nas patas da capivara;
+  - **estalo** de estrelinhas coloridas (`Estalo`) nos momentos-chave.
 - Pílula "imagem ilustrativa", pequena, no canto do painel, quando a ilustração representar um efeito e não uma promessa.
 - Sempre bastante espaço vazio. Uma ideia por vez no painel.
 

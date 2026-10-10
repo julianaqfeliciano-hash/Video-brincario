@@ -152,7 +152,9 @@ export const CenaExemplo: React.FC = () => {
 ```
 
 - Tempos **sempre** via `quando(...)`, nunca números fixos: se a fala mudar, a cena acompanha.
-- Uma única cor de destaque (terracota) por quadro; elementos entram em sequência; nada de piscar.
+- Uma única cor de destaque (coral) por quadro; elementos entram em sequência; nada de piscar.
+- Personagem = sempre a capivara escoteira (`Capivara`); texto sobre cenário com `textoClaro`;
+  cartões e círculos no estilo "adesivo" (ver ESTILO.md §2.1 e §2.5).
 - A primeira cena usa `<Cena ... semFadeEntrada>`: o quadro 0 vira a capa do Reels.
 - Renderize só a cena: `--frames=<round(inicio*30)-2>-<round(fim*30)>`.
 
@@ -169,8 +171,9 @@ npx remotion render <Nome> out/<slug>_completo.mp4 --codec=h264
 .venv/bin/python scripts/verificar_zonas.py <Nome>          # sai com erro se algo entrar nas faixas
 ```
 
-`verificar_zonas.py` renderiza sem o vídeo da fala e procura qualquer coisa diferente do creme nos
-250 px de cima e nos 400 px de baixo, quadro a quadro; informe também a faixa onde o conteúdo ficou.
+`verificar_zonas.py` renderiza duas vezes (sem a fala, e só o cenário) e compara quadro a quadro: o
+que muda é conteúdo; acusa qualquer coisa nos 250 px de cima e nos 400 px de baixo (funciona com
+cenário animado). Leva ~4 min para 40 s de vídeo. Informe também a faixa onde o conteúdo ficou.
 
 **Versão de 15 s (450 quadros):** em `Anuncio.tsx`, defina `TRECHOS` em quadros do vídeo completo —
 gancho + produto/benefício + cartão final, cortando nas pausas. Cada trecho começa em
@@ -187,9 +190,9 @@ Envie o vídeo completo, o de 15 s e uma imagem com as faixas do Instagram desen
 
 | Arquivo | Para quê |
 |---|---|
-| `tema.ts` | `cores`, `fonte` (Nunito embutida), `layout` (painel, cartão, legenda), `fps` |
+| `tema.ts` | `cores` (paleta viva), `textoClaro`, `fonte` (Nunito embutida), `layout`, `fps` |
 | `tempo.ts` | `criarTempo(palavras)` → `quando`; `entrada`/`salto` (molas), `quadroDe` |
-| `VideoBase.tsx` | fundo creme + cenas (`children`) + cartão da fala + legendas; props `guias`, `semVideo` |
+| `VideoBase.tsx` | cenário (`fundo`, padrão creme alegre) + cenas + cartão da fala + legendas; props `guias`, `semVideo`, `soFundo` |
 | `Cena.tsx` | mostra o conteúdo do painel só entre `inicio` e `fim`, com fade curto |
 | `Legendas.tsx` | até 3 palavras, quebra em pontuação/pausa, palavra falada em terracota |
 | `CartaoFala.tsx` | vídeo da fala recortado no rosto, cantos de 48 px |
@@ -198,6 +201,9 @@ Envie o vídeo completo, o de 15 s e uma imagem com as faixas do Instagram desen
 | `componentes/FotoProduto` | produto recortado com saltinho, flutuação e sombra |
 | `componentes/Selo` | pílula de benefício + ícones `IconeSom`, `IconeMochila`, `IconeLugar` |
 | `componentes/CartaoFinal` | "Brincar também é **cuidar**", "Link na bio", @brincario.loja |
+| `componentes/Capivara` | mascote escoteira: expressões, braços (`ombro`/`cotovelo`), `segura`, piscadas |
+| `componentes/Floresta` | cenário de tela inteira: floresta chuvosa → dia de sol na `virada` (s) |
+| `componentes/Enfeites` | `FundoAlegre`, `FundoMarca` (tapa o cenário num trecho), `Brilho`, `Estalo` |
 
 Quando uma cena nova se repetir entre vídeos, mova o desenho para `componentes/` em vez de copiar.
 Depois de refatorar, confira que um vídeo já pronto não mudou: renderize quadros com

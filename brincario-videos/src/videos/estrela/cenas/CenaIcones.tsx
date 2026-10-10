@@ -128,10 +128,14 @@ export const CenaIcones: React.FC = () => {
           y={340 + 24 * (1 - eTitulo)}
           textAnchor="middle"
           fontFamily={fonte}
-          fontWeight={700}
-          fontSize={30}
+          fontWeight={900}
+          fontSize={34}
           letterSpacing={3.6}
-          fill={cores.salviaEscura}
+          fill={cores.branco}
+          stroke={cores.texto}
+          strokeWidth={8}
+          paintOrder="stroke"
+          strokeLinejoin="round"
           opacity={eTitulo}
         >
           A MESMA BASE PARA
@@ -146,11 +150,12 @@ export const CenaIcones: React.FC = () => {
               transform={`translate(${x} 570) scale(${0.6 + 0.4 * p})`}
               opacity={Math.min(1, p * 1.5)}
             >
+              <circle cy={9} r={122} fill={cores.texto} />
               <circle
                 r={122}
                 fill={cores.cremeClaro}
-                stroke={cores.salvia}
-                strokeWidth={5}
+                stroke={cores.texto}
+                strokeWidth={7}
               />
               <g transform={`scale(${escala})`}>
                 <Icone />
@@ -159,9 +164,13 @@ export const CenaIcones: React.FC = () => {
                 y={196}
                 textAnchor="middle"
                 fontFamily={fonte}
-                fontWeight={800}
-                fontSize={48}
-                fill={cores.texto}
+                fontWeight={900}
+                fontSize={50}
+                fill={cores.branco}
+                stroke={cores.texto}
+                strokeWidth={10}
+                paintOrder="stroke"
+                strokeLinejoin="round"
               >
                 {rotulo}
               </text>

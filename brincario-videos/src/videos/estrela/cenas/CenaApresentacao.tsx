@@ -1,11 +1,11 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
-import { cores, fonte, textoClaro } from "../../../brincario/tema";
+import { cores, fonte } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 3: "Eu sou a Juliana, psicóloga infantil."
-// Cartão de apresentação: ícone, nome e rótulo da profissão.
+// Apresentação da marca sobre o fundo limpo (a chuva some aqui): ícone, nome e profissão.
 
 export const CenaApresentacao: React.FC = () => {
   const frame = useCurrentFrame();
@@ -62,7 +62,7 @@ export const CenaApresentacao: React.FC = () => {
             fontWeight: 900,
             fontSize: 120,
             lineHeight: 1,
-            ...textoClaro,
+            color: cores.texto,
             opacity: eNome,
             transform: `translateY(${24 * (1 - eNome)}px)`,
           }}
@@ -76,8 +76,12 @@ export const CenaApresentacao: React.FC = () => {
             fontWeight: 700,
             fontSize: 36,
             letterSpacing: "0.14em",
-            ...textoClaro,
-            WebkitTextStroke: "7px #2B2350",
+            color: cores.branco,
+            background: cores.terracota,
+            padding: "12px 30px",
+            borderRadius: 40,
+            border: `5px solid ${cores.texto}`,
+            boxShadow: `0 7px 0 ${cores.texto}`,
             opacity: eRotulo,
             transform: `translateY(${24 * (1 - eRotulo)}px)`,
           }}

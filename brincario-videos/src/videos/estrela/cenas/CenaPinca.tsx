@@ -1,11 +1,15 @@
 import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
+import {
+  corCapivara as CAP,
+  corEscoteiro as UNIFORME,
+} from "../../../brincario/componentes/Capivara";
 import { cores, fonte, fps } from "../../../brincario/tema";
 import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 8: "Ao mexer nas pontinhas, ela usa a pinça dos dedos e as duas mãos ao mesmo tempo."
-// Mão com polegar e indicador destacados pinçando a pontinha de uma estrela; rótulo "pinça";
+// Patinha de capivara (dedinhos com almofadinhas destacadas) pinçando a pontinha de uma estrela; rótulo "pinça";
 // em "duas mãos" entra a segunda mão, espelhada.
 
 const limitar = {
@@ -65,55 +69,105 @@ const MaoPinca: React.FC<{ abertura: number; brilho: number }> = ({
   const baseDedao = { x: 70, y: 40 };
   const pontaIndicador = ponta(baseIndicador, { x: 222, y: -14 }, -giro);
   const pontaDedao = ponta(baseDedao, { x: 222, y: 8 }, giro);
-  return (
+  const dedo = (
+    base: { x: number; y: number },
+    pontaD: { x: number; y: number },
+  ) => (
     <>
-      <rect
-        x={-150}
-        y={-50}
-        width={115}
-        height={100}
-        rx={22}
-        fill={cores.terracotaClara}
-      />
-      <rect
-        x={-50}
-        y={-72}
-        width={160}
-        height={144}
-        rx={62}
-        fill={cores.salvia}
+      <line
+        x1={base.x}
+        y1={base.y}
+        x2={pontaD.x}
+        y2={pontaD.y}
+        stroke={CAP.contorno}
+        strokeWidth={46}
+        strokeLinecap="round"
       />
       <line
-        x1={baseIndicador.x}
-        y1={baseIndicador.y}
-        x2={pontaIndicador.x}
-        y2={pontaIndicador.y}
-        stroke={cores.salvia}
+        x1={base.x}
+        y1={base.y}
+        x2={pontaD.x}
+        y2={pontaD.y}
+        stroke={CAP.escuro}
         strokeWidth={34}
         strokeLinecap="round"
       />
-      <line
-        x1={baseDedao.x}
-        y1={baseDedao.y}
-        x2={pontaDedao.x}
-        y2={pontaDedao.y}
-        stroke={cores.salvia}
-        strokeWidth={36}
+      {/* Almofadinha ("feijãozinho") rosa na ponta, destacada em coral */}
+      <circle
+        cx={pontaD.x}
+        cy={pontaD.y}
+        r={13}
+        fill={cores.rosa}
+        stroke={cores.terracota}
+        strokeWidth={6}
+      />
+    </>
+  );
+  return (
+    <>
+      {/* Bracinho de pelo com o punho cáqui do uniforme */}
+      <rect
+        x={-180}
+        y={-46}
+        width={170}
+        height={92}
+        rx={40}
+        fill={CAP.corpo}
+        stroke={CAP.contorno}
+        strokeWidth={6}
+      />
+      <rect
+        x={-180}
+        y={-52}
+        width={58}
+        height={104}
+        rx={22}
+        fill={UNIFORME.caqui}
+        stroke={CAP.contorno}
+        strokeWidth={6}
+      />
+      {/* Patinha fofa */}
+      <ellipse
+        cx={30}
+        cy={0}
+        rx={88}
+        ry={76}
+        fill={CAP.corpo}
+        stroke={CAP.contorno}
+        strokeWidth={6}
+      />
+      <path
+        d="M-20 -70 q8 -10 14 2 M10 -76 q8 -10 14 2"
+        stroke={CAP.contorno}
+        strokeWidth={4}
         strokeLinecap="round"
+        fill="none"
+        opacity={0.5}
       />
-      {/* Polegar e indicador destacados */}
-      <circle
-        cx={pontaIndicador.x}
-        cy={pontaIndicador.y}
-        r={17}
-        fill={cores.terracota}
+      <ellipse
+        cx={20}
+        cy={14}
+        rx={28}
+        ry={22}
+        fill={cores.rosa}
+        opacity={0.85}
       />
-      <circle
-        cx={pontaDedao.x}
-        cy={pontaDedao.y}
-        r={18}
-        fill={cores.terracota}
-      />
+      {[
+        [62, 56],
+        [26, 70],
+      ].map(([cx, cy]) => (
+        <circle
+          key={cx}
+          cx={cx}
+          cy={cy}
+          r={18}
+          fill={CAP.escuro}
+          stroke={CAP.contorno}
+          strokeWidth={5}
+        />
+      ))}
+      {dedo(baseIndicador, pontaIndicador)}
+      {dedo(baseDedao, pontaDedao)}
       {brilho > 0 && (
         <circle
           cx={PINCA_LOCAL.x}
@@ -173,6 +227,10 @@ export const CenaPinca: React.FC = () => {
             fontWeight={900}
             fontSize={170}
             fill={cores.terracota}
+            stroke={cores.texto}
+            strokeWidth={10}
+            paintOrder="stroke"
+            strokeLinejoin="round"
           >
             2
           </text>
@@ -180,23 +238,39 @@ export const CenaPinca: React.FC = () => {
             x={540}
             y={404}
             fontFamily={fonte}
-            fontWeight={800}
             fontSize={64}
-            fill={cores.texto}
+            fontWeight={900}
+            fill={cores.branco}
+            stroke={cores.texto}
+            strokeWidth={9}
+            paintOrder="stroke"
+            strokeLinejoin="round"
           >
             mãos
           </text>
         </g>
 
-        {/* Estrela */}
+        <defs>
+          <linearGradient
+            id="estrelaLilasDourada"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="0.3"
+          >
+            <stop offset="0.1" stopColor="#B07CE8" />
+            <stop offset="0.9" stopColor="#F2C14E" />
+          </linearGradient>
+        </defs>
+        {/* Estrela (lilás e dourada, como o produto) */}
         <g
           transform={`translate(${CENTRO.x} ${CENTRO.y}) scale(${0.6 + 0.4 * eEstrela}) translate(${-CENTRO.x} ${-CENTRO.y})`}
         >
           <polygon
             points={estrela(CENTRO.x, CENTRO.y, RAIO, RAIO * 0.52)}
-            fill={cores.cremeClaro}
-            stroke={cores.salviaEscura}
-            strokeWidth={7}
+            fill="url(#estrelaLilasDourada)"
+            stroke={cores.texto}
+            strokeWidth={8}
             strokeLinejoin="round"
             opacity={Math.min(1, eEstrela)}
           />
@@ -228,8 +302,8 @@ export const CenaPinca: React.FC = () => {
             y1={PINCA.y + 30}
             x2={linhaX}
             y2={linhaY}
-            stroke={cores.salviaEscura}
-            strokeWidth={4}
+            stroke={cores.texto}
+            strokeWidth={6}
             strokeLinecap="round"
           />
           <text
@@ -238,8 +312,12 @@ export const CenaPinca: React.FC = () => {
             textAnchor="middle"
             fontFamily={fonte}
             fontWeight={900}
-            fontSize={64}
-            fill={cores.terracota}
+            fontSize={68}
+            fill={cores.branco}
+            stroke={cores.texto}
+            strokeWidth={10}
+            paintOrder="stroke"
+            strokeLinejoin="round"
           >
             pinça
           </text>

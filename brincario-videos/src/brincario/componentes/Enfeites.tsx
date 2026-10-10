@@ -111,3 +111,33 @@ export const Estalo: React.FC<{
     </g>
   );
 };
+
+/**
+ * Fundo limpo da marca (creme + enfeites) cobrindo a tela inteira entre `inicio` e `fim` (s),
+ * por cima de um cenário (ex.: a floresta na chuva). Usado na apresentação de quem fala.
+ */
+export const FundoMarca: React.FC<{ inicio: number; fim: number }> = ({
+  inicio,
+  fim,
+}) => {
+  const frame = useCurrentFrame();
+  const a = quadroDe(inicio);
+  const b = Math.round(fim * fps);
+  if (frame < a || frame >= b + 6) return null;
+  const opacidade = interpolate(frame, [a, a + 6, b, b + 6], [0, 1, 1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: cores.creme,
+        opacity: opacidade,
+      }}
+    >
+      <FundoAlegre />
+    </div>
+  );
+};

@@ -1,5 +1,6 @@
 import React from "react";
 import { VideoBase, type PropsVideo } from "../../brincario/VideoBase";
+import { FundoMarca } from "../../brincario/componentes/Enfeites";
 import { Floresta } from "../../brincario/componentes/Floresta";
 import { fps } from "../../brincario/tema";
 import { CenaApresentacao } from "./cenas/CenaApresentacao";
@@ -23,13 +24,20 @@ export const duracaoVideo = Math.ceil((duracaoFala + SEGUNDOS_FINAIS) * fps);
 
 // A floresta triste vira dia de sol quando a capivara começa a usar a estrela ("A estrela tátil...")
 const VIRADA = quando("estrela", quando("desacelerar"));
+// Na apresentação ("Eu sou a Juliana, psicóloga infantil.") a chuva some: só o fundo da marca
+const APRESENTACAO = { inicio: quando("eu"), fim: quando("muitas") - 0.1 };
 
 export const Video: React.FC<PropsVideo> = (props) => (
   <VideoBase
     video={midia.fala}
     palavras={palavras}
     recorteY="50%"
-    fundo={<Floresta virada={VIRADA} />}
+    fundo={
+      <>
+        <Floresta virada={VIRADA} />
+        <FundoMarca inicio={APRESENTACAO.inicio} fim={APRESENTACAO.fim} />
+      </>
+    }
     {...props}
   >
     {/* Painel de ilustração: cada cena aparece só no seu trecho */}

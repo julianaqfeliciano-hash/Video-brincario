@@ -47,8 +47,8 @@ export const MolduraBroll: React.FC<{
         height: altura,
         borderRadius: 36,
         overflow: "hidden",
-        boxShadow: "0 16px 44px rgba(59,51,46,0.20)",
-        border: `6px solid ${cores.cremeClaro}`,
+        boxShadow: `0 0 0 5px ${cores.texto}, 0 11px 0 5px ${cores.texto}`,
+        border: `7px solid ${cores.cremeClaro}`,
         opacity: Math.min(1, progresso * 1.5),
         transform: `scale(${0.7 + 0.3 * progresso})`,
       }}

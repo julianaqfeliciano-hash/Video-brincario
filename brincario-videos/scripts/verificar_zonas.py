@@ -1,7 +1,9 @@
 """Confere se algum texto/elemento entra nas faixas que o Instagram cobre (ESTILO.md §2.3).
 
-Renderiza a composição sem o vídeo da fala (prop semVideo) em meia resolução e procura, quadro a
-quadro, pixels diferentes do fundo creme nos 250 px de cima e nos 400 px de baixo.
+Renderiza a composição em meia resolução duas vezes — sem o vídeo da fala (prop semVideo) e só com
+o cenário de fundo (prop soFundo) — e procura, quadro a quadro, pixels que diferem entre as duas
+(ou seja: cenas, textos e legendas) nos 250 px de cima e nos 400 px de baixo. Funciona com fundo
+liso ou com cenário animado (ex.: a floresta).
 
 Uso:
   .venv/bin/python scripts/verificar_zonas.py Estrela
@@ -22,28 +24,38 @@ parser.add_argument("--base", type=int, default=400)
 args = parser.parse_args()
 
 W, H = 540, 960  # meia resolução de 1080x1920
-CREME = np.array([0xF6, 0xEF, 0xE3], dtype=np.int16)
 LIMIAR = 50  # sombras suaves ficam abaixo disso; texto e ilustração ficam bem acima
 
-with tempfile.TemporaryDirectory() as tmp:
-    video = Path(tmp) / "verificacao.mp4"
+def renderizar(props: str, destino: Path):
     subprocess.run(
-        ["npx", "remotion", "render", args.composicao, str(video), "--props", '{"semVideo":true}',
-         "--muted", "--scale=0.5", "--log=error"],
+        ["npx", "remotion", "render", args.composicao, str(destino), "--props", props,
+         "--muted", "--scale=0.5", "--log=error", "--image-format=png", "--codec=prores",
+         "--prores-profile=4444"],
         check=True,
     )
-    p = subprocess.Popen(
+
+
+def ler(video: Path):
+    return subprocess.Popen(
         ["ffmpeg", "-v", "error", "-i", str(video), "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
         stdout=subprocess.PIPE,
     )
+
+
+with tempfile.TemporaryDirectory() as tmp:
+    com_conteudo, so_fundo = Path(tmp) / "conteudo.mov", Path(tmp) / "fundo.mov"
+    renderizar('{"semVideo":true}', com_conteudo)
+    renderizar('{"semVideo":true,"soFundo":true}', so_fundo)
+    p, q = ler(com_conteudo), ler(so_fundo)
     topo, base = args.topo // 2, (1920 - args.base) // 2
     problemas, faixa_conteudo, n = [], [H, 0], 0
     while True:
-        buf = p.stdout.read(W * H * 3)
-        if len(buf) < W * H * 3:
+        buf, buf_fundo = p.stdout.read(W * H * 3), q.stdout.read(W * H * 3)
+        if len(buf) < W * H * 3 or len(buf_fundo) < W * H * 3:
             break
         quadro = np.frombuffer(buf, np.uint8).reshape(H, W, 3).astype(np.int16)
-        tem = np.abs(quadro - CREME).max(axis=2) > LIMIAR
+        fundo = np.frombuffer(buf_fundo, np.uint8).reshape(H, W, 3).astype(np.int16)
+        tem = np.abs(quadro - fundo).max(axis=2) > LIMIAR
         linhas = np.nonzero(tem.any(axis=1))[0]
         if len(linhas):
             faixa_conteudo = [min(faixa_conteudo[0], linhas.min()), max(faixa_conteudo[1], linhas.max())]

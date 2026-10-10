@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
 import { MolduraBroll } from "../../../brincario/componentes/MolduraBroll";
-import { cores, fonte } from "../../../brincario/tema";
+import { fonte, textoClaro } from "../../../brincario/tema";
 import { entrada, midia, quando, salto } from "../dados";
 
 // ROTEIRO.md, cenas 10–13: "e ainda vira brincadeira. Coroa, pulseira, estrela do mar."
@@ -24,9 +24,9 @@ const Rotulo: React.FC<{
       top: y + 20 * (1 - progresso),
       textAlign: "center",
       fontFamily: fonte,
-      fontWeight: 800,
+      fontWeight: 900,
       fontSize: 42,
-      color: cores.texto,
+      ...textoClaro,
       opacity: progresso,
     }}
   >
@@ -60,10 +60,10 @@ export const CenaBroll: React.FC = () => {
       <Cena inicio={tBrincadeira} fim={tCoroa + 0.15}>
         <MolduraBroll
           src={midia.broll}
-          x={540 - 175}
-          y={262}
-          largura={350}
-          altura={590}
+          x={540 - 170}
+          y={282}
+          largura={340}
+          altura={570}
           inicio={tBrincadeira}
           fim={tCoroa + 0.15}
           trechoInicio={0.5}

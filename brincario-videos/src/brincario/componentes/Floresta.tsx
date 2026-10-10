@@ -125,7 +125,7 @@ export const Floresta: React.FC<{ virada: number }> = ({ virada }) => {
     0,
   );
 
-  const solY = interpolate(sol, [0, 1], [700, 330]);
+  const solY = interpolate(sol, [0, 1], [700, 250]);
   const nuvensAbrem = sol * 620;
 
   return (
@@ -156,8 +156,8 @@ export const Floresta: React.FC<{ virada: number }> = ({ virada }) => {
       {/* Sol nascendo */}
       {sol > 0 && (
         <g opacity={sol}>
-          <circle cx={820} cy={solY} r={260} fill="url(#brilhoSol)" />
-          <g transform={`translate(820 ${solY}) rotate(${t * 12})`}>
+          <circle cx={150} cy={solY} r={230} fill="url(#brilhoSol)" />
+          <g transform={`translate(150 ${solY}) scale(0.8) rotate(${t * 12})`}>
             {Array.from({ length: 12 }).map((_, i) => (
               <rect
                 key={i}
@@ -172,30 +172,30 @@ export const Floresta: React.FC<{ virada: number }> = ({ virada }) => {
             ))}
           </g>
           <circle
-            cx={820}
+            cx={150}
             cy={solY}
-            r={95}
+            r={78}
             fill={cores.amarelo}
             stroke="#F5A623"
             strokeWidth={6}
           />
           <path
-            d={`M790 ${solY + 10} Q820 ${solY + 36} 850 ${solY + 10}`}
+            d={`M126 ${solY + 8} Q150 ${solY + 30} 174 ${solY + 8}`}
             stroke="#C2410C"
             strokeWidth={7}
             strokeLinecap="round"
             fill="none"
           />
-          <circle cx={792} cy={solY - 18} r={8} fill="#C2410C" />
-          <circle cx={848} cy={solY - 18} r={8} fill="#C2410C" />
+          <circle cx={128} cy={solY - 15} r={7} fill="#C2410C" />
+          <circle cx={172} cy={solY - 15} r={7} fill="#C2410C" />
         </g>
       )}
 
       {/* Nuvens fofas do dia */}
       <g opacity={sol}>
         <Nuvem
-          x={180 + Math.sin(t / 3) * 20}
-          y={300}
+          x={880 + Math.sin(t / 3) * 20}
+          y={290}
           s={0.9}
           cor={cores.branco}
         />
@@ -249,31 +249,31 @@ export const Floresta: React.FC<{ virada: number }> = ({ virada }) => {
       </g>
       <g opacity={sol} transform={`translate(0 ${(1 - sol) * 60})`}>
         <ArvoreFeliz
-          x={110}
+          x={60}
           base={880}
-          h={400}
+          h={380}
           cor="#4CC46B"
           corEscura="#2E9E55"
           frutas
         />
         <ArvoreFeliz
-          x={980}
+          x={1030}
           base={900}
-          h={430}
+          h={400}
           cor="#4CC46B"
           corEscura="#2E9E55"
         />
         <ArvoreFeliz
-          x={300}
-          base={780}
-          h={240}
+          x={220}
+          base={800}
+          h={220}
           cor="#6BD58A"
           corEscura="#3FAE66"
         />
         <ArvoreFeliz
-          x={790}
-          base={790}
-          h={260}
+          x={860}
+          base={810}
+          h={230}
           cor="#6BD58A"
           corEscura="#3FAE66"
           frutas
