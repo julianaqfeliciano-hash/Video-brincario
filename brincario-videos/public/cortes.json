@@ -1,0 +1,49 @@
+{
+  "cortes": [
+    {
+      "inicio": 5.503,
+      "fim": 5.873,
+      "motivo": "pausa de 0.53 s entre \"infantil.\" e \"Muitas\""
+    },
+    {
+      "inicio": 9.683,
+      "fim": 10.152,
+      "motivo": "pausa de 0.63 s entre \"sentindo.\" e \"Quando\""
+    },
+    {
+      "inicio": 13.971,
+      "fim": 14.517,
+      "motivo": "pausa de 0.71 s entre \"desacelerar.\" e \"A\""
+    },
+    {
+      "inicio": 18.722,
+      "fim": 18.994,
+      "motivo": "pausa de 0.43 s entre \"que\" e \"quando\""
+    },
+    {
+      "inicio": 22.934,
+      "fim": 23.294,
+      "motivo": "pausa de 0.52 s entre \"acalmar.\" e \"Ao\""
+    },
+    {
+      "inicio": 27.09,
+      "fim": 27.521,
+      "motivo": "pausa de 0.59 s entre \"tempo.\" e \"A\""
+    },
+    {
+      "inicio": 34.299,
+      "fim": 34.785,
+      "motivo": "pausa de 0.65 s entre \"mar.\" e \"É\""
+    },
+    {
+      "inicio": 39.151,
+      "fim": 39.708,
+      "motivo": "pausa de 0.72 s entre \"tarefa.\" e \"Brincar\""
+    },
+    {
+      "inicio": 42.093,
+      "fim": 42.432,
+      "motivo": "silêncio no fim"
+    }
+  ]
+}
