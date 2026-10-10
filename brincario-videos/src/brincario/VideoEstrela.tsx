@@ -4,8 +4,10 @@ import transcricao from "../../public/legendas/fala_cortada.json";
 import { CartaoFala } from "./CartaoFala";
 import { Legendas } from "./Legendas";
 import { CenaBroll } from "./cenas/CenaBroll";
+import { CenaFinal } from "./cenas/CenaFinal";
 import { CenaIcones } from "./cenas/CenaIcones";
 import { CenaPinca } from "./cenas/CenaPinca";
+import { CenaProduto } from "./cenas/CenaProduto";
 import { CenaToque } from "./cenas/CenaToque";
 import { cores, fps, layout } from "./tema";
 
@@ -22,6 +24,8 @@ export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) =
       <CenaPinca />
       <CenaIcones />
       <CenaBroll />
+      <CenaProduto />
+      <CenaFinal />
 
       <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" />
       <Legendas palavras={transcricao.palavras} />
