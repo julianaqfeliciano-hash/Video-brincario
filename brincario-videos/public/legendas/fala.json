@@ -232,7 +232,7 @@
       "fim": 15.01
     },
     {
-      "texto": "Tati",
+      "texto": "tátil",
       "inicio": 15.01,
       "fim": 15.25
     },
@@ -257,7 +257,7 @@
       "fim": 16.43
     },
     {
-      "texto": "autoregulação.",
+      "texto": "autorregulação.",
       "inicio": 16.43,
       "fim": 17.5
     },
@@ -472,13 +472,8 @@
       "fim": 29.42
     },
     {
-      "texto": "a",
+      "texto": "abotoar",
       "inicio": 29.42,
-      "fim": 29.43
-    },
-    {
-      "texto": "botar",
-      "inicio": 29.43,
       "fim": 29.8
     },
     {
@@ -532,13 +527,8 @@
       "fim": 32.6
     },
     {
-      "texto": "Corou",
+      "texto": "Vira",
       "inicio": 32.6,
-      "fim": 32.94
-    },
-    {
-      "texto": "a",
-      "inicio": 32.94,
       "fim": 33.0
     },
     {
