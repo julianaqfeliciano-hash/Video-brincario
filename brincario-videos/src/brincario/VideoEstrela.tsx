@@ -3,8 +3,10 @@ import { AbsoluteFill } from "remotion";
 import transcricao from "../../public/legendas/fala_cortada.json";
 import { CartaoFala } from "./CartaoFala";
 import { Legendas } from "./Legendas";
+import { CenaApresentacao } from "./cenas/CenaApresentacao";
 import { CenaBroll } from "./cenas/CenaBroll";
 import { CenaFinal } from "./cenas/CenaFinal";
+import { CenaGancho } from "./cenas/CenaGancho";
 import { CenaIcones } from "./cenas/CenaIcones";
 import { CenaPinca } from "./cenas/CenaPinca";
 import { CenaProduto } from "./cenas/CenaProduto";
@@ -20,6 +22,8 @@ export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) =
   return (
     <AbsoluteFill style={{ backgroundColor: cores.creme }}>
       {/* Painel de ilustração: cada cena aparece só no seu trecho (ROTEIRO.md) */}
+      <CenaGancho />
+      <CenaApresentacao />
       <CenaToque />
       <CenaPinca />
       <CenaIcones />
