@@ -51,6 +51,8 @@ for w in palavras:
     for s0, s1 in sil:
         if w["fim"] <= s0 or w["inicio"] >= s1:
             continue
+        if w["inicio"] >= s0 and w["fim"] <= s1:
+            continue  # palavra baixinha dentro da "pausa": mantém o tempo do Whisper
         antes, depois = max(0, s0 - w["inicio"]), max(0, w["fim"] - s1)
         if antes >= depois:
             w["fim"] = round(min(w["fim"], s0), 3)
