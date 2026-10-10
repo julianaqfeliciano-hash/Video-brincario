@@ -70,20 +70,20 @@ y=250   │                              │
         │   PAINEL — fundo creme        │  conteúdo importante entre 250 e ~860 px
         │   ilustração / número / ícone │
 y=900   ├──┬────────────────────────┬──┤
+        │  │    legenda (y≈1010)    │  │  legenda sobre o vídeo, acima da cabeça
         │  │                        │  │  cartão da apresentadora
         │  │  vídeo da fala, rosto  │  │  x: 64 → 1016 (largura 952)
-        │  │  centralizado          │  │  y: 900 → 1856 (altura 956)
+        │  │  centralizado          │  │  y: 900 → 1890 (altura 990)
         │  │                        │  │  cantos 48 px, sombra suave
-        │  │    legenda (y≈1440)    │  │
 y=1520  │  │· · · · · · · · · · · · │  │  1520–1920 px: interface do Instagram,
-        │  │                        │  │  nada importante aqui
-y=1856  │  └────────────────────────┘  │
+        │  │                        │  │  nada importante aqui (o rosto pode passar)
+y=1890  │  └────────────────────────┘  │
 y=1920  └──────────────────────────────┘
 ```
 
 - O fundo creme ocupa a tela inteira, e o cartão do vídeo "flutua" sobre ele (sombra `0 20px 60px rgba(59,51,46,.18)`).
 - O vídeo é recortado (`object-fit: cover`) com o **rosto centralizado** no terço superior do cartão.
-- A legenda fica centralizada horizontalmente, com a linha de base em **y ≈ 1440**: abaixo do queixo e acima da zona de interface.
+- A legenda fica centralizada horizontalmente em **y ≈ 1010**, no alto do cartão, sobre o fundo atrás da cabeça. Com o rosto grande no cartão, essa é a posição que não cobre a boca e fica fora das zonas do Instagram.
 - Abertura (gancho): nos primeiros 1–2 s a apresentadora pode aparecer em tela cheia, com o título no painel sobreposto, e então "encolher" até o cartão (mola, ~0,6 s).
 
 ### 2.4 Legendas

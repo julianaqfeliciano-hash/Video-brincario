@@ -1,0 +1,52 @@
+import React from "react";
+import { AbsoluteFill } from "remotion";
+import transcricao from "../../public/legendas/fala_cortada.json";
+import { CartaoFala } from "./CartaoFala";
+import { Legendas } from "./Legendas";
+import { cores, fps, layout } from "./tema";
+
+// Tempo extra com o cartão final parado depois da fala (ROTEIRO.md, cena 16)
+const SEGUNDOS_FINAIS = 1;
+
+export const duracaoEstrela = Math.ceil((transcricao.duracao + SEGUNDOS_FINAIS) * fps);
+
+export const VideoEstrela: React.FC<{ guias?: boolean }> = ({ guias = false }) => {
+  return (
+    <AbsoluteFill style={{ backgroundColor: cores.creme }}>
+      {/* Painel de ilustração (as cenas entram aqui no passo 6) */}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: layout.painel.y,
+          width: layout.largura,
+          height: layout.painel.altura,
+        }}
+      />
+
+      <CartaoFala video="midia/fala_cortada.mp4" recorteY="50%" />
+      <Legendas palavras={transcricao.palavras} />
+
+      {guias && <Guias />}
+    </AbsoluteFill>
+  );
+};
+
+// Zonas que o Instagram cobre com a interface (só para conferência, não vai no vídeo final)
+const Guias: React.FC = () => {
+  const faixa: React.CSSProperties = {
+    position: "absolute",
+    left: 0,
+    width: layout.largura,
+    background: "rgba(200,40,40,0.18)",
+    borderColor: "rgba(200,40,40,0.8)",
+    borderStyle: "dashed",
+    borderWidth: 0,
+  };
+  return (
+    <>
+      <div style={{ ...faixa, top: 0, height: 250, borderBottomWidth: 3 }} />
+      <div style={{ ...faixa, top: layout.altura - 400, height: 400, borderTopWidth: 3 }} />
+    </>
+  );
+};
