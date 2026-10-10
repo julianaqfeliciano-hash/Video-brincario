@@ -1,8 +1,8 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
-import { Cena } from "../Cena";
-import { cores, fonte } from "../tema";
-import { entrada, quando, salto } from "../tempo";
+import { Cena } from "../../../brincario/Cena";
+import { cores, fonte } from "../../../brincario/tema";
+import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 3: "Eu sou a Juliana, psicóloga infantil."
 // Cartão de apresentação: ícone, nome e rótulo da profissão.
@@ -36,7 +36,10 @@ export const CenaApresentacao: React.FC = () => {
           width={150}
           height={150}
           viewBox="0 0 150 150"
-          style={{ opacity: Math.min(1, eIcone * 1.5), transform: `scale(${0.6 + 0.4 * eIcone})` }}
+          style={{
+            opacity: Math.min(1, eIcone * 1.5),
+            transform: `scale(${0.6 + 0.4 * eIcone})`,
+          }}
         >
           <circle cx={75} cy={75} r={75} fill={cores.salvia} />
           {/* Coração acolhido por uma mão */}

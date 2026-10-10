@@ -1,8 +1,8 @@
 import React from "react";
 import { interpolateColors, useCurrentFrame } from "remotion";
-import { Cena } from "../Cena";
-import { cores, fonte, fps } from "../tema";
-import { entrada, quando, salto } from "../tempo";
+import { Cena } from "../../../brincario/Cena";
+import { cores, fonte, fps } from "../../../brincario/tema";
+import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cenas 1–2: "Seu filho não para de mexer as mãos? Calma, isso tem explicação."
 // Título + criança com as mãozinhas inquietas; em "Calma" as mãos desaceleram e descansam;
@@ -15,10 +15,15 @@ const Crianca: React.FC<{ t: number; calma: number }> = ({ t, calma }) => {
   // Ângulo do braço direito (0° = horizontal p/ fora, positivo = para baixo)
   const amplitude = 22 * (1 - calma);
   const base = -35 + (70 + 35) * calma; // mãos para cima e agitadas -> descansando ao lado do corpo
-  const angulo = (fase: number) => ((base + amplitude * Math.sin(2 * Math.PI * 3.6 * t + fase)) * Math.PI) / 180;
+  const angulo = (fase: number) =>
+    ((base + amplitude * Math.sin(2 * Math.PI * 3.6 * t + fase)) * Math.PI) /
+    180;
   const mao = (lado: 1 | -1, fase: number) => {
     const a = angulo(fase);
-    return { x: 540 + lado * (OMBRO.x + BRACO * Math.cos(a)), y: OMBRO.y + BRACO * Math.sin(a) };
+    return {
+      x: 540 + lado * (OMBRO.x + BRACO * Math.cos(a)),
+      y: OMBRO.y + BRACO * Math.sin(a),
+    };
   };
   const dir = mao(1, 0);
   const esq = mao(-1, 1.7);
@@ -64,13 +69,29 @@ const Crianca: React.FC<{ t: number; calma: number }> = ({ t, calma }) => {
         />
       ))}
       {/* Corpo */}
-      <rect x={540 - 88} y={612} width={176} height={168} rx={60} fill={cores.salvia} />
+      <rect
+        x={540 - 88}
+        y={612}
+        width={176}
+        height={168}
+        rx={60}
+        fill={cores.salvia}
+      />
       {/* Cabeça */}
       <circle cx={540} cy={548} r={62} fill={cores.terracotaClara} />
-      <path d="M480 540 Q482 480 540 482 Q598 480 600 540 Q585 510 540 512 Q495 510 480 540 Z" fill={cores.salviaEscura} />
+      <path
+        d="M480 540 Q482 480 540 482 Q598 480 600 540 Q585 510 540 512 Q495 510 480 540 Z"
+        fill={cores.salviaEscura}
+      />
       <circle cx={518} cy={556} r={6} fill={cores.texto} />
       <circle cx={562} cy={556} r={6} fill={cores.texto} />
-      <path d="M524 578 Q540 590 556 578" fill="none" stroke={cores.texto} strokeWidth={5} strokeLinecap="round" />
+      <path
+        d="M524 578 Q540 590 556 578"
+        fill="none"
+        stroke={cores.texto}
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
       {/* Mãos */}
       <circle cx={dir.x} cy={dir.y} r={24} fill={cores.terracotaClara} />
       <circle cx={esq.x} cy={esq.y} r={24} fill={cores.terracotaClara} />
@@ -89,16 +110,22 @@ export const CenaGancho: React.FC = () => {
   const tExplicacao = quando("explicacao");
   const tFim = quando("eu", tExplicacao) - 0.1;
 
-  const corMaos = interpolateColors(entrada(frame, tMaos, { damping: 20, stiffness: 160 }), [0, 1], [
-    cores.texto,
-    cores.terracota,
-  ]);
+  const corMaos = interpolateColors(
+    entrada(frame, tMaos, { damping: 20, stiffness: 160 }),
+    [0, 1],
+    [cores.texto, cores.terracota],
+  );
   const calma = entrada(frame, tCalma, { damping: 26, stiffness: 40 });
   const ePilula = salto(frame, tExplicacao);
 
   return (
     <Cena inicio={0} fim={tFim} semFadeEntrada>
-      <svg width={1080} height={900} viewBox="0 0 1080 900" style={{ position: "absolute" }}>
+      <svg
+        width={1080}
+        height={900}
+        viewBox="0 0 1080 900"
+        style={{ position: "absolute" }}
+      >
         <Crianca t={t} calma={calma} />
       </svg>
 
@@ -149,8 +176,18 @@ export const CenaGancho: React.FC = () => {
         >
           <svg width={46} height={46} viewBox="0 0 46 46">
             <circle cx={23} cy={23} r={23} fill={cores.salvia} />
-            <path d="M23 10 A9 9 0 0 1 29 26 V30 H17 V26 A9 9 0 0 1 23 10 Z" fill={cores.cremeClaro} />
-            <rect x={18} y={32} width={10} height={4} rx={2} fill={cores.cremeClaro} />
+            <path
+              d="M23 10 A9 9 0 0 1 29 26 V30 H17 V26 A9 9 0 0 1 23 10 Z"
+              fill={cores.cremeClaro}
+            />
+            <rect
+              x={18}
+              y={32}
+              width={10}
+              height={4}
+              rx={2}
+              fill={cores.cremeClaro}
+            />
           </svg>
           tem explicação
         </div>

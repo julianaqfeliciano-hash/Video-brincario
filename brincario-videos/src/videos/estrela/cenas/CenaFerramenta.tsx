@@ -1,8 +1,9 @@
 import React from "react";
-import { Img, staticFile, useCurrentFrame } from "remotion";
-import { Cena } from "../Cena";
-import { cores, fonte } from "../tema";
-import { entrada, quadroDe, quando, salto } from "../tempo";
+import { useCurrentFrame } from "remotion";
+import { Cena } from "../../../brincario/Cena";
+import { FotoProduto } from "../../../brincario/componentes/FotoProduto";
+import { cores, fonte } from "../../../brincario/tema";
+import { entrada, midia, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 6: "A estrela tátil vira uma ferramenta de autorregulação."
 // Foto da estrela com saltinho em "tátil", flutuando; pílula "ferramenta de autorregulação".
@@ -18,7 +19,6 @@ export const CenaFerramenta: React.FC = () => {
 
   const eRotulo = entrada(frame, tEstrela);
   const eFoto = salto(frame, tTatil);
-  const flutua = Math.sin((frame - quadroDe(tTatil)) / 18) * 8;
   const ePilula = entrada(frame, tAuto);
 
   return (
@@ -40,32 +40,15 @@ export const CenaFerramenta: React.FC = () => {
         ESTRELA TÁTIL
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          left: 540 - 140,
-          top: 690,
-          width: 280,
-          height: 26,
-          borderRadius: "50%",
-          background: "rgba(59,51,46,0.14)",
-          filter: "blur(8px)",
-          opacity: Math.min(1, eFoto),
-          transform: `scale(${1 - flutua / 80})`,
-        }}
-      />
-      <Img
-        src={staticFile("midia/estrela_recorte.png")}
-        style={{
-          position: "absolute",
-          left: 540 - 180,
-          top: 330 + flutua,
-          width: 360,
-          height: 360,
-          objectFit: "contain",
-          opacity: Math.min(1, eFoto * 1.5),
-          transform: `scale(${0.6 + 0.4 * eFoto})`,
-        }}
+      <FotoProduto
+        src={midia.produto}
+        topo={330}
+        tamanho={360}
+        progresso={eFoto}
+        inicio={tTatil}
+        sombraY={690}
+        sombraLargura={280}
+        sombraAltura={26}
       />
 
       <div
@@ -92,7 +75,8 @@ export const CenaFerramenta: React.FC = () => {
             fontSize: 42,
           }}
         >
-          ferramenta de&nbsp;<span style={{ color: cores.terracotaClara }}>autorregulação</span>
+          ferramenta de&nbsp;
+          <span style={{ color: cores.terracotaClara }}>autorregulação</span>
         </div>
       </div>
     </Cena>

@@ -1,8 +1,14 @@
 import React from "react";
-import { Img, interpolate, interpolateColors, staticFile, useCurrentFrame } from "remotion";
-import { Cena } from "../Cena";
-import { cores, fonte, fps } from "../tema";
-import { entrada, quadroDe, quando, salto } from "../tempo";
+import {
+  Img,
+  interpolate,
+  interpolateColors,
+  staticFile,
+  useCurrentFrame,
+} from "remotion";
+import { Cena } from "../../../brincario/Cena";
+import { cores, fonte, fps } from "../../../brincario/tema";
+import { entrada, midia, quadroDe, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 7: "A criança aprende que quando a agitação sobe, existe algo que ela mesma
 // pode fazer para se acalmar." Fluxo de 3 ícones em círculos ligados por setas.
@@ -10,15 +16,32 @@ import { entrada, quadroDe, quando, salto } from "../tempo";
 const Y = 530;
 const R = 100;
 const XS = [210, 540, 870];
-const limitar = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+const limitar = {
+  extrapolateLeft: "clamp",
+  extrapolateRight: "clamp",
+} as const;
 
-const Seta: React.FC<{ de: number; ate: number; progresso: number }> = ({ de, ate, progresso }) => {
+const Seta: React.FC<{ de: number; ate: number; progresso: number }> = ({
+  de,
+  ate,
+  progresso,
+}) => {
   const x2 = de + (ate - de) * progresso;
   if (progresso <= 0.01) return null;
   return (
-    <g stroke={cores.salviaEscura} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" fill="none">
+    <g
+      stroke={cores.salviaEscura}
+      strokeWidth={6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+    >
       <line x1={de} y1={Y} x2={x2} y2={Y} />
-      {progresso > 0.85 && <polyline points={`${x2 - 16},${Y - 14} ${x2},${Y} ${x2 - 16},${Y + 14}`} />}
+      {progresso > 0.85 && (
+        <polyline
+          points={`${x2 - 16},${Y - 14} ${x2},${Y} ${x2 - 16},${Y + 14}`}
+        />
+      )}
     </g>
   );
 };
@@ -51,16 +74,41 @@ export const CenaAutorregulacao: React.FC = () => {
     const s = i / 40;
     const x = XS[0] - 62 + 124 * s;
     const amp = 14 + 14 * sobe;
-    const y = Y + 22 - 34 * sobe * s + amp * Math.sin(2 * Math.PI * 3.5 * s - t * 10);
+    const y =
+      Y + 22 - 34 * sobe * s + amp * Math.sin(2 * Math.PI * 3.5 * s - t * 10);
     onda.push(`${x.toFixed(1)},${y.toFixed(1)}`);
   }
 
-  const circulo = (x: number, p: number, borda: string, conteudo: React.ReactNode, rotulo: string) =>
+  const circulo = (
+    x: number,
+    p: number,
+    borda: string,
+    conteudo: React.ReactNode,
+    rotulo: string,
+  ) =>
     p > 0.001 && (
-      <g transform={`translate(${x} ${Y}) scale(${0.6 + 0.4 * p}) translate(${-x} ${-Y})`} opacity={Math.min(1, p * 1.5)}>
-        <circle cx={x} cy={Y} r={R} fill={cores.cremeClaro} stroke={borda} strokeWidth={6} />
+      <g
+        transform={`translate(${x} ${Y}) scale(${0.6 + 0.4 * p}) translate(${-x} ${-Y})`}
+        opacity={Math.min(1, p * 1.5)}
+      >
+        <circle
+          cx={x}
+          cy={Y}
+          r={R}
+          fill={cores.cremeClaro}
+          stroke={borda}
+          strokeWidth={6}
+        />
         {conteudo}
-        <text x={x} y={Y + R + 64} textAnchor="middle" fontFamily={fonte} fontWeight={800} fontSize={40} fill={cores.texto}>
+        <text
+          x={x}
+          y={Y + R + 64}
+          textAnchor="middle"
+          fontFamily={fonte}
+          fontWeight={800}
+          fontSize={40}
+          fill={cores.texto}
+        >
           {rotulo}
         </text>
       </g>
@@ -107,7 +155,7 @@ export const CenaAutorregulacao: React.FC = () => {
           cores.salvia,
           <foreignObject x={XS[1] - 70} y={Y - 70} width={140} height={140}>
             <Img
-              src={staticFile("midia/estrela_recorte.png")}
+              src={staticFile(midia.produto)}
               style={{
                 width: 140,
                 height: 140,

@@ -2,27 +2,47 @@ import React from "react";
 import { interpolateColors, useCurrentFrame } from "remotion";
 import { Cena } from "../Cena";
 import { cores, fonte } from "../tema";
-import { entrada, quando, salto } from "../tempo";
+import { entrada, salto } from "../tempo";
 
-// ROTEIRO.md, cena 16: "Brincar também é cuidar. O link está na bio."
-// Cartão final: frase da marca, botão "Link na bio" e @brincario.loja. Fica até o fim do vídeo.
-
-export const CenaFinal: React.FC = () => {
+/**
+ * Cartão final da marca (ESTILO.md §2.7): frase com uma palavra em terracota, botão e @.
+ * Fica até o fim do vídeo. Os tempos (s) vêm de `quando(...)` do vídeo.
+ */
+export const CartaoFinal: React.FC<{
+  inicio: number; // entra o cartão com a frase
+  tDestaque: number; // a palavra de destaque fica terracota
+  tBotao: number; // entra o botão
+  tArroba: number; // entra o @
+  linha1?: string;
+  antesDestaque?: string;
+  destaque?: string;
+  botao?: string;
+  arroba?: string;
+}> = ({
+  inicio,
+  tDestaque,
+  tBotao,
+  tArroba,
+  linha1 = "Brincar também",
+  antesDestaque = "é ",
+  destaque = "cuidar",
+  botao = "Link na bio",
+  arroba = "@brincario.loja",
+}) => {
   const frame = useCurrentFrame();
 
-  const tBrincar = quando("brincar");
-  const tCuidar = quando("cuidar", tBrincar);
-  const tLink = quando("link", tCuidar);
-  const tBio = quando("bio", tLink);
-
-  const eCartao = salto(frame, tBrincar);
-  const eFrase = entrada(frame, tBrincar);
-  const corCuidar = interpolateColors(entrada(frame, tCuidar), [0, 1], [cores.texto, cores.terracota]);
-  const eBotao = salto(frame, tLink);
-  const eArroba = entrada(frame, tBio);
+  const eCartao = salto(frame, inicio);
+  const eFrase = entrada(frame, inicio);
+  const corDestaque = interpolateColors(
+    entrada(frame, tDestaque),
+    [0, 1],
+    [cores.texto, cores.terracota],
+  );
+  const eBotao = salto(frame, tBotao);
+  const eArroba = entrada(frame, tArroba);
 
   return (
-    <Cena inicio={tBrincar} fim={9999}>
+    <Cena inicio={inicio} fim={9999}>
       <div
         style={{
           position: "absolute",
@@ -55,8 +75,10 @@ export const CenaFinal: React.FC = () => {
             transform: `translateY(${24 * (1 - eFrase)}px)`,
           }}
         >
-          Brincar também
-          <br />é <span style={{ color: corCuidar }}>cuidar</span>
+          {linha1}
+          <br />
+          {antesDestaque}
+          <span style={{ color: corDestaque }}>{destaque}</span>
         </div>
 
         <div
@@ -71,7 +93,7 @@ export const CenaFinal: React.FC = () => {
             transform: `scale(${0.6 + 0.4 * eBotao})`,
           }}
         >
-          Link na bio
+          {botao}
         </div>
 
         <div
@@ -83,7 +105,7 @@ export const CenaFinal: React.FC = () => {
             transform: `translateY(${20 * (1 - eArroba)}px)`,
           }}
         >
-          @brincario.loja
+          {arroba}
         </div>
       </div>
     </Cena>

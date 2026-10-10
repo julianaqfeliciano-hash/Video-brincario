@@ -1,18 +1,29 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
-import { Cena } from "../Cena";
-import { cores, fonte } from "../tema";
-import { entrada, quando, salto } from "../tempo";
+import { Cena } from "../../../brincario/Cena";
+import { cores, fonte } from "../../../brincario/tema";
+import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 9: "A mesma base para segurar o lápis, abotoar a roupa e usar a tesoura"
 // Um ícone por palavra, com um pequeno salto ao entrar. Os ícones ficam na tela até "brincadeira".
 
 const Lapis: React.FC = () => (
   <g transform="rotate(-40)">
-    <rect x={-20} y={-108} width={40} height={24} rx={10} fill={cores.terracotaClara} />
+    <rect
+      x={-20}
+      y={-108}
+      width={40}
+      height={24}
+      rx={10}
+      fill={cores.terracotaClara}
+    />
     <rect x={-20} y={-88} width={40} height={14} fill={cores.salviaEscura} />
     <rect x={-20} y={-76} width={40} height={124} fill={cores.terracota} />
-    <path d="M-20 46 L20 46 L0 92 Z" fill={cores.terracotaClara} strokeLinejoin="round" />
+    <path
+      d="M-20 46 L20 46 L0 92 Z"
+      fill={cores.terracotaClara}
+      strokeLinejoin="round"
+    />
     <path d="M-7 77 L7 77 L0 92 Z" fill={cores.texto} />
   </g>
 );
@@ -26,20 +37,65 @@ const Roupa: React.FC = () => (
       strokeWidth={5}
       strokeLinejoin="round"
     />
-    <line x1={0} y1={-58} x2={0} y2={72} stroke={cores.salviaEscura} strokeWidth={4} />
+    <line
+      x1={0}
+      y1={-58}
+      x2={0}
+      y2={72}
+      stroke={cores.salviaEscura}
+      strokeWidth={4}
+    />
     {[-34, -4, 26, 54].map((y) => (
-      <circle key={y} cx={0} cy={y} r={7} fill={cores.cremeClaro} stroke={cores.salviaEscura} strokeWidth={3} />
+      <circle
+        key={y}
+        cx={0}
+        cy={y}
+        r={7}
+        fill={cores.cremeClaro}
+        stroke={cores.salviaEscura}
+        strokeWidth={3}
+      />
     ))}
   </g>
 );
 
 const Tesoura: React.FC = () => (
   <g>
-    <line x1={-26} y1={46} x2={40} y2={-84} stroke={cores.salviaEscura} strokeWidth={15} strokeLinecap="round" />
-    <line x1={26} y1={46} x2={-40} y2={-84} stroke={cores.salviaEscura} strokeWidth={15} strokeLinecap="round" />
+    <line
+      x1={-26}
+      y1={46}
+      x2={40}
+      y2={-84}
+      stroke={cores.salviaEscura}
+      strokeWidth={15}
+      strokeLinecap="round"
+    />
+    <line
+      x1={26}
+      y1={46}
+      x2={-40}
+      y2={-84}
+      stroke={cores.salviaEscura}
+      strokeWidth={15}
+      strokeLinecap="round"
+    />
     <circle cx={0} cy={-6} r={7} fill={cores.cremeClaro} />
-    <circle cx={-32} cy={62} r={24} fill="none" stroke={cores.terracota} strokeWidth={13} />
-    <circle cx={32} cy={62} r={24} fill="none" stroke={cores.terracota} strokeWidth={13} />
+    <circle
+      cx={-32}
+      cy={62}
+      r={24}
+      fill="none"
+      stroke={cores.terracota}
+      strokeWidth={13}
+    />
+    <circle
+      cx={32}
+      cy={62}
+      r={24}
+      fill="none"
+      stroke={cores.terracota}
+      strokeWidth={13}
+    />
   </g>
 );
 
@@ -85,8 +141,17 @@ export const CenaIcones: React.FC = () => {
           const p = salto(frame, quando(palavra, tInicio) + ATRASO);
           if (p <= 0.001) return null;
           return (
-            <g key={palavra} transform={`translate(${x} 570) scale(${0.6 + 0.4 * p})`} opacity={Math.min(1, p * 1.5)}>
-              <circle r={122} fill={cores.cremeClaro} stroke={cores.salvia} strokeWidth={5} />
+            <g
+              key={palavra}
+              transform={`translate(${x} 570) scale(${0.6 + 0.4 * p})`}
+              opacity={Math.min(1, p * 1.5)}
+            >
+              <circle
+                r={122}
+                fill={cores.cremeClaro}
+                stroke={cores.salvia}
+                strokeWidth={5}
+              />
               <g transform={`scale(${escala})`}>
                 <Icone />
               </g>

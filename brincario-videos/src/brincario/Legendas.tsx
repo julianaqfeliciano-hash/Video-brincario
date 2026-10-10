@@ -1,8 +1,7 @@
 import React from "react";
 import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { cores, fonte, layout } from "./tema";
-
-export type Palavra = { texto: string; inicio: number; fim: number };
+import type { Palavra } from "./tempo";
 
 type Grupo = { palavras: Palavra[]; inicio: number; fim: number };
 

@@ -1,9 +1,11 @@
 import { Composition } from "remotion";
 import { Teste } from "./Teste";
-import { AnuncioEstrela, duracaoAnuncio } from "./brincario/AnuncioEstrela";
-import { VideoEstrela, duracaoEstrela } from "./brincario/VideoEstrela";
+import * as Estrela from "./videos/estrela";
+// novo_video.py: importações
 
 // Vídeos verticais: 1080x1920 (9:16), 30 fps
+const formato = { fps: 30, width: 1080, height: 1920 } as const;
+
 export const RemotionRoot: React.FC = () => {
   return (
     <>
@@ -11,27 +13,22 @@ export const RemotionRoot: React.FC = () => {
         id="Teste"
         component={Teste}
         durationInFrames={90}
-        fps={30}
-        width={1080}
-        height={1920}
+        {...formato}
       />
       <Composition
         id="Estrela"
-        component={VideoEstrela}
-        durationInFrames={duracaoEstrela}
-        fps={30}
-        width={1080}
-        height={1920}
+        component={Estrela.Video}
+        durationInFrames={Estrela.duracaoVideo}
         defaultProps={{ guias: false, semVideo: false }}
+        {...formato}
       />
       <Composition
         id="EstrelaAnuncio15s"
-        component={AnuncioEstrela}
-        durationInFrames={duracaoAnuncio}
-        fps={30}
-        width={1080}
-        height={1920}
+        component={Estrela.Anuncio}
+        durationInFrames={Estrela.duracaoAnuncio}
+        {...formato}
       />
+      {/* novo_video.py: composições */}
     </>
   );
 };
