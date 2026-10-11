@@ -10,8 +10,8 @@ import { limitar, textoSvg } from "./estilo";
 // ROTEIRO.md, cena 10: "Com o tempo ele aprende a reconhecer, estou agitado, vou usar o Giro Flex.
 // Isso é autorregulação." — fluxo capivara agitada → Giro → capivara calma; título com estalo.
 
-const Y = 430;
-const R = 92;
+const Y = 450;
+const R = 84;
 const XS = [220, 540, 860];
 
 const Seta: React.FC<{ de: number; ate: number; p: number }> = ({
@@ -75,7 +75,7 @@ export const CenaAutorregulacao: React.FC = () => {
         <circle cy={8} r={R} fill={cores.texto} />
         <circle r={R} fill={cores.cremeClaro} stroke={borda} strokeWidth={8} />
         {conteudo}
-        <text y={R + 52} {...textoSvg(36)}>
+        <text y={R + 48} {...textoSvg(36)}>
           {rotulo}
         </text>
       </g>
@@ -90,12 +90,12 @@ export const CenaAutorregulacao: React.FC = () => {
         style={{ position: "absolute" }}
       >
         {eTitulo < 0.05 ? (
-          <text x={540} y={312} {...textoSvg(38)} opacity={eRotulo}>
+          <text x={540} y={330} {...textoSvg(38)} opacity={eRotulo}>
             ELE APRENDE A RECONHECER
           </text>
         ) : (
-          <g transform={`translate(540 318) scale(${0.5 + 0.5 * eTitulo})`}>
-            <text {...textoSvg(76)} fill={cores.amarelo}>
+          <g transform={`translate(540 342) scale(${0.5 + 0.5 * eTitulo})`}>
+            <text {...textoSvg(64)} fill={cores.amarelo}>
               AUTORREGULAÇÃO!
             </text>
           </g>
@@ -108,7 +108,7 @@ export const CenaAutorregulacao: React.FC = () => {
           <Capivara
             x={0}
             y={14}
-            escala={0.28}
+            escala={0.255}
             expressao="agitada"
             bracoEsq={{ ombro: 150 + 12 * Math.sin(frame * 0.8), cotovelo: 0 }}
             bracoDir={{ ombro: 150 - 12 * Math.sin(frame * 0.8), cotovelo: 0 }}
@@ -122,10 +122,10 @@ export const CenaAutorregulacao: React.FC = () => {
           <g transform={`rotate(${frame * 4.5})`}>
             <image
               href={staticFile(midia.produto)}
-              x={-72}
-              y={-72}
-              width={144}
-              height={144}
+              x={-65}
+              y={-65}
+              width={130}
+              height={130}
             />
           </g>,
           "vou usar o Giro",
@@ -136,7 +136,7 @@ export const CenaAutorregulacao: React.FC = () => {
           <Capivara
             x={0}
             y={14}
-            escala={0.28}
+            escala={0.255}
             expressao="calma"
             bracoEsq={{ ombro: -20, cotovelo: -60 }}
             bracoDir={{ ombro: -20, cotovelo: -60 }}
@@ -144,7 +144,7 @@ export const CenaAutorregulacao: React.FC = () => {
           "calma",
           cores.terracota,
         )}
-        <Estalo x={540} y={430} tempo={tAuto} raio={165} />
+        <Estalo x={540} y={450} tempo={tAuto} raio={165} />
       </svg>
     </Cena>
   );

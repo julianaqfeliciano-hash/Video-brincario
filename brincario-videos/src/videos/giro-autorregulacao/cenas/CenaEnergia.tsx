@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { Cena } from "../../../brincario/Cena";
 import { cores, fonte } from "../../../brincario/tema";
-import { entrada, marcos, quando, salto } from "../dados";
+import { entrada, quando, salto } from "../dados";
 
 // ROTEIRO.md, cena 5: "ela precisa de algo concreto para fazer com essa energia."
 // Raios de energia girando em volta da capivara; pílula "algo concreto pra fazer"
@@ -23,7 +23,7 @@ export const CenaEnergia: React.FC = () => {
   const tEla = quando("ela", quando("funciona"));
   const tConcreto = quando("concreto");
   const tEnergia = quando("energia");
-  const tFim = marcos.virada - 0.05;
+  const tFim = quando("o", tEnergia) - 0.02; // termina no "O" de "O giro tem..."
 
   const ePilula = salto(frame, tConcreto);
   const eRaios = entrada(frame, tEla);
