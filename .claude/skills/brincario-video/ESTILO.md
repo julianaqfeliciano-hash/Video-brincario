@@ -110,10 +110,11 @@ y=1920  └───────────────────────
   faixa de insígnias coloridas, bermuda). Expressões: `feliz`, `calma`, `agitada` (olhos abertos,
   sobrancelhas preocupadas, gotinha de suor), `surpresa`. Ela segura o produto com `segura`.
 - Mãos que tocam o produto são **patinhas de capivara** (almofadinhas rosa nas pontas).
-- **Cenário com história** (`componentes/Floresta.tsx`): floresta triste e chuvosa (chuva, árvores
+- **Cenário com história** (`componentes/Floresta.tsx` ou `componentes/Mar.tsx`): floresta triste e chuvosa (chuva, árvores
   secas, neblina, olhinhos no mato) até o produto aparecer; na virada (`virada`, em s) a chuva para,
   as nuvens abrem, nasce o sol e tudo fica verde e alegre. Na apresentação de quem fala, o fundo da
   marca cobre o cenário (`FundoMarca`). Relâmpago só como clarão dentro das nuvens, nunca a tela toda.
+  No mar (vídeo do Giro), a capivara navega num barquinho o vídeo todo e o mar agitado vira pôr do sol.
 - Vocabulário que substitui o da referência:
   - **número grande** que conta, para dados como "3 em cada 5" ou "2 mãos" ou "+5 usos";
   - **ícones em círculos** ligados por setas, para causa e efeito ("toque → acalma → foca");

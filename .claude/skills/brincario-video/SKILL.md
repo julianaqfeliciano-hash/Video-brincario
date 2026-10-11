@@ -161,6 +161,12 @@ export const CenaExemplo: React.FC = () => {
 ```
 
 - Tempos **sempre** via `quando(...)`, nunca números fixos: se a fala mudar, a cena acompanha.
+- **Palavras curtas** ("com", "a", "e", "o") aparecem várias vezes: procure-as a partir de uma
+  palavra-âncora da mesma frase (ex.: o "Com" de "Com o tempo" vem depois de "...junto com o
+  movimento", então `quando("com", quando("movimento", quando("respire")))`). Confira com quadros
+  soltos se cada cena aparece no trecho certo.
+- **Personagem fixo** (ex.: a capivara no barco do Giro): faça um componente que atravessa o vídeo
+  e decide pose/expressão pelo tempo (`cenas/Barco.tsx` do Giro); as cenas ficam acima dele.
 - **Fala regravada?** Liste as palavras que as cenas pedem a `quando` e confira se existem na nova
   transcrição — e se a ocorrência encontrada é a certa (ex.: "Ao mexer" virou "Para mexer", e
   `quando("ao")` passaria a achar o "ao" de "ao mesmo tempo"). Trechos do anúncio também são
@@ -216,6 +222,8 @@ Envie o vídeo completo, o de 15 s e uma imagem com as faixas do Instagram desen
 | `componentes/CartaoFinal` | "Brincar também é **cuidar**", "Link na bio", @brincario.loja |
 | `componentes/Capivara` | mascote escoteira: expressões, braços (`ombro`/`cotovelo`), `segura`, piscadas |
 | `componentes/Floresta` | cenário de tela inteira: floresta chuvosa → dia de sol na `virada` (s) |
+| `componentes/Mar` | cenário de tela inteira: mar agitado → pôr do sol na `virada`; `alturaOnda`/`estadoMar` para boiar |
+| `componentes/Velocimetro` | medidor "agitação" (verde → vermelho) com ponteiro, estilo adesivo |
 | `componentes/Enfeites` | `FundoAlegre`, `FundoMarca` (tapa o cenário num trecho), `Brilho`, `Estalo` |
 
 Quando uma cena nova se repetir entre vídeos, mova o desenho para `componentes/` em vez de copiar.
