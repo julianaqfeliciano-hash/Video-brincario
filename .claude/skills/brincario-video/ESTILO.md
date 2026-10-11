@@ -88,6 +88,10 @@ y=1920  └───────────────────────
 ```
 
 - O fundo creme ocupa a tela inteira, e o cartão do vídeo "flutua" sobre ele (sombra `0 20px 60px rgba(59,51,46,.18)`).
+- **Pessoa recortada (preferida pela usuária a partir do vídeo do Giro):** em vez do cartão, a fala
+  aparece sem a parede de fundo — só o corpo e a gesticulação, por cima do cenário (mar, floresta),
+  no mesmo enquadramento do cartão e descendo até a borda de baixo, com sombra suave
+  (`scripts/recortar_pessoa.py` + `VideoBase.recorte`).
 - O vídeo é recortado (`object-fit: cover`) com o **rosto centralizado** no terço superior do cartão.
 - A legenda fica centralizada horizontalmente em **y ≈ 1010**, no alto do cartão, sobre o fundo atrás da cabeça. Com o rosto grande no cartão, essa é a posição que não cobre a boca e fica fora das zonas do Instagram.
 - Abertura (gancho): nos primeiros 1–2 s a apresentadora pode aparecer em tela cheia, com o título no painel sobreposto, e então "encolher" até o cartão (mola, ~0,6 s).

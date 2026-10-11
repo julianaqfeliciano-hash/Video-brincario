@@ -39,6 +39,7 @@ Video-brincario/
     │   ├── propor_cortes.py     pausas > 0,3 s e repetições → cortes.json (só propõe)
     │   ├── aplicar_cortes.py    gera fala_cortada.mp4 (30 fps) + fala_cortada.json
     │   ├── recortar_produto.py  remove o fundo da foto (rembg) → PNG transparente
+    │   ├── recortar_pessoa.py   tira a parede de trás de quem fala (RVM) → WebM com transparência
     │   ├── verificar_zonas.py   confere as faixas do Instagram em todos os quadros
     │   └── modelo_video/        esqueleto copiado para cada vídeo novo
     ├── src/brincario/           biblioteca reutilizável (ver "Biblioteca" abaixo)
@@ -133,6 +134,25 @@ no alto do cartão (y≈1010) para não cobrir a boca e ficar fora das faixas do
 npx remotion render <Nome> out/<slug>_0-5s.mp4 --frames=0-149
 ```
 
+**Pessoa recortada (sem a parede de fundo) — padrão a partir do vídeo do Giro.** A usuária prefere
+ver só o corpo e a gesticulação dela por cima do cenário, sem o cartão e sem a parede branca:
+
+```bash
+.venv/bin/python scripts/novo_video.py recortar <slug>    # ~11 min para 50 s (modelo resnet50, CPU)
+```
+
+Gera `fala_recortada.webm` (VP9 com transparência, mudo, mesmos quadros da `fala_cortada.mp4`).
+Em `dados.ts` preencha `midia.recorte = { video, proporcao: altura / largura }` e passe
+`recorte={midia.recorte}` ao `<VideoBase>`: a pessoa fica no mesmo enquadramento do cartão, mas
+desce até a borda de baixo da tela, com sombra suave; o som continua vindo do `.mp4`.
+- Confira o recorte sobre magenta (`ffmpeg ... -c:v libvpx-vp9 -i fala_recortada.webm` — o decodificador
+  `libvpx-vp9` antes do `-i` é obrigatório para ler a transparência) e meça manchas fora do corpo.
+- A marca d'água do teleprompter **em cima** é cortada (`--cortar-topo 0.09`); a de **baixo** pode ficar
+  no recorte quando passa por cima da roupa, mas fica abaixo do enquadramento (só aparece até ~linha 696
+  de 850) — confira se mudar a escala/`recorteY`.
+- O Remotion precisa de `<OffthreadVideo transparent>` (já no `PessoaRecortada`); a renderização fica
+  um pouco mais lenta.
+
 ### 5. Construir cena por cena
 
 Cada cena é um componente em `src/videos/<slug>/cenas/`, incluído no `Video.tsx` na ordem do vídeo.
@@ -215,6 +235,7 @@ Envie o vídeo completo, o de 15 s e uma imagem com as faixas do Instagram desen
 | `Cena.tsx` | mostra o conteúdo do painel só entre `inicio` e `fim`, com fade curto |
 | `Legendas.tsx` | até 3 palavras, quebra em pontuação/pausa, palavra falada em terracota |
 | `CartaoFala.tsx` | vídeo da fala recortado no rosto, cantos de 48 px |
+| `PessoaRecortada.tsx` | a pessoa sem fundo (WebM transparente) sobre o cenário; usado via `VideoBase.recorte` |
 | `Anuncio.tsx` | emenda trechos do vídeo completo (versão curta) |
 | `componentes/MolduraBroll` | b-roll em moldura arredondada com zoom lento (`trechoInicio` em s) |
 | `componentes/FotoProduto` | produto recortado com saltinho, flutuação e sombra |
