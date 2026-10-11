@@ -10,6 +10,9 @@ export const midia = {
   produto: `${PASTA}/produto.png`,
   // b-roll copiado para public/videos/__SLUG__/broll/ — ex.: midia.broll("parque.mp4")
   broll: (arquivo: string) => `${PASTA}/broll/${arquivo}`,
+  // Opcional — fala sem a parede de fundo (novo_video.py recortar): descomente e passe
+  // recorte={midia.recorte} ao <VideoBase> no Video.tsx
+  // recorte: { video: `${PASTA}/fala_recortada.webm`, proporcao: 850 / 478 },
 };
 
 export const duracaoFala = transcricao.duracao;

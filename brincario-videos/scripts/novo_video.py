@@ -14,6 +14,12 @@ Etapa 2 — cortar:
   .venv/bin/python scripts/novo_video.py cortar <slug>
 
   Gera fala_cortada.mp4 (30 fps) e fala_cortada.json (tempos na linha do tempo cortada).
+
+Etapa opcional — recortar a pessoa (tirar a parede de fundo):
+  .venv/bin/python scripts/novo_video.py recortar <slug>
+
+  Gera fala_recortada.webm (com transparência). Depois, em src/videos/<slug>/dados.ts, preencha
+  `midia.recorte` e passe `recorte={midia.recorte}` ao <VideoBase> no Video.tsx.
 """
 import argparse
 import json
@@ -153,6 +159,20 @@ def cortar(a):
     )
 
 
+def recortar(a):
+    pub, _ = pastas(a.slug)
+    rodar(
+        PY, "scripts/recortar_pessoa.py", pub / "fala_cortada.mp4", pub / "fala_recortada.webm",
+        "--modelo", a.modelo, "--cortar-topo", str(a.cortar_topo),
+    )
+    largura, altura = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+         "-of", "csv=p=0", str(pub / "fala_cortada.mp4")],
+        capture_output=True, text=True, check=True,
+    ).stdout.strip().split(",")
+    print(f"\nEm dados.ts: recorte: {{ video: `${{PASTA}}/fala_recortada.webm`, proporcao: {altura} / {largura} }}")
+
+
 parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 sub = parser.add_subparsers(dest="etapa", required=True)
 p = sub.add_parser("preparar")
@@ -168,6 +188,12 @@ c.add_argument("--velocidade", type=float, default=1.0, help="ex.: 1.15 para fal
 c.add_argument("--suave", type=float, default=0.1, help="fusão (s) entre trechos cortados; 0 = corte seco")
 c.add_argument("--filtro", default="", help='tratamento de imagem, ex.: "eq=contrast=1.08:saturation=1.15"')
 c.set_defaults(func=cortar)
+r = sub.add_parser("recortar")
+r.add_argument("slug")
+r.add_argument("--modelo", choices=["resnet50", "mobilenetv3"], default="resnet50")
+r.add_argument("--cortar-topo", type=float, default=0.09,
+               help="fração de cima que nunca é pessoa (marca d'água do teleprompter); 0 desliga")
+r.set_defaults(func=recortar)
 
 args = parser.parse_args()
 args.func(args)

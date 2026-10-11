@@ -10,6 +10,8 @@ export const midia = {
   produto: `${PASTA}/produto.png`, // Giro laranja e azul (principal)
   produtoVerde: `${PASTA}/produto-verde-dourado.png`,
   produtoAzul: `${PASTA}/produto-azul-verde.png`,
+  // Fala sem a parede de fundo (scripts/recortar_pessoa.py); 478x850 no original
+  recorte: { video: `${PASTA}/fala_recortada.webm`, proporcao: 850 / 478 },
   // b-roll copiado para public/videos/giro-autorregulacao/broll/ — ex.: midia.broll("parque.mp4")
   broll: (arquivo: string) => `${PASTA}/broll/${arquivo}`,
 };

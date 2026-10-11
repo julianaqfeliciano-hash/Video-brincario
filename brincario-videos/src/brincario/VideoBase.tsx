@@ -3,6 +3,7 @@ import { AbsoluteFill } from "remotion";
 import { CartaoFala } from "./CartaoFala";
 import { FundoAlegre } from "./componentes/Enfeites";
 import { Legendas } from "./Legendas";
+import { PessoaRecortada, type Recorte } from "./PessoaRecortada";
 import { cores, layout } from "./tema";
 import type { Palavra } from "./tempo";
 
@@ -17,13 +18,15 @@ export type PropsVideo = {
 
 /**
  * Estrutura comum dos vídeos da Brincário (ESTILO.md §2.3): fundo creme, painel de ilustração
- * em cima (as cenas vão em `children`), cartão com a fala embaixo e legendas palavra por palavra.
+ * em cima (as cenas vão em `children`), a fala embaixo e legendas palavra por palavra.
+ * A fala aparece num cartão arredondado ou, com `recorte`, só a pessoa recortada sobre o cenário.
  */
 export const VideoBase: React.FC<
   PropsVideo & {
     video: string; // caminho em public/ da fala cortada
     palavras: Palavra[];
     recorteY?: string; // ajuste vertical do rosto no cartão
+    recorte?: Recorte; // pessoa sem fundo (scripts/recortar_pessoa.py): substitui o cartão
     fundo?: React.ReactNode; // cenário próprio (ex.: <Floresta />); padrão: fundo creme alegre
     children?: React.ReactNode;
   }
@@ -31,6 +34,7 @@ export const VideoBase: React.FC<
   video,
   palavras,
   recorteY = "50%",
+  recorte,
   guias = false,
   semVideo = false,
   soFundo = false,
@@ -42,7 +46,16 @@ export const VideoBase: React.FC<
     {!soFundo && (
       <>
         {children}
-        <CartaoFala video={video} recorteY={recorteY} semVideo={semVideo} />
+        {recorte ? (
+          <PessoaRecortada
+            recorte={recorte}
+            audio={video}
+            recorteY={recorteY}
+            semVideo={semVideo}
+          />
+        ) : (
+          <CartaoFala video={video} recorteY={recorteY} semVideo={semVideo} />
+        )}
         <Legendas palavras={palavras} />
       </>
     )}
