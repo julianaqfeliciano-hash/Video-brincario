@@ -32,6 +32,7 @@ export const Video: React.FC<PropsVideo> = (props) => (
     video={midia.fala}
     palavras={palavras}
     recorteY="52%" // rosto no cartão e marca d'água do teleprompter fora do recorte
+    recorte={midia.recorte} // só a Juliana, sem a parede, por cima da floresta
     fundo={
       <>
         <Floresta virada={VIRADA} />

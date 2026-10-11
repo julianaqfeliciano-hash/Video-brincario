@@ -9,6 +9,8 @@ export const midia = {
   fala: `${PASTA}/fala_cortada.mp4`,
   produto: `${PASTA}/produto.png`,
   broll: `${PASTA}/parque.mp4`,
+  // Fala sem a parede de fundo (scripts/recortar_pessoa.py); 478x850 no original
+  recorte: { video: `${PASTA}/fala_recortada.webm`, proporcao: 850 / 478 },
 };
 
 export const duracaoFala = transcricao.duracao;

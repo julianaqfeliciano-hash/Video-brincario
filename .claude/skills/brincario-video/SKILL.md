@@ -40,6 +40,7 @@ Video-brincario/
     │   ├── aplicar_cortes.py    gera fala_cortada.mp4 (30 fps) + fala_cortada.json
     │   ├── recortar_produto.py  remove o fundo da foto (rembg) → PNG transparente
     │   ├── recortar_pessoa.py   tira a parede de trás de quem fala (RVM) → WebM com transparência
+    │   ├── normalizar_som.py    sobe a voz do vídeo final para -14 LUFS (imagem intacta)
     │   ├── verificar_zonas.py   confere as faixas do Instagram em todos os quadros
     │   └── modelo_video/        esqueleto copiado para cada vídeo novo
     ├── src/brincario/           biblioteca reutilizável (ver "Biblioteca" abaixo)
@@ -208,6 +209,13 @@ cobrir o efeito do ajuste, proponha um trecho maior.
 ```bash
 npx remotion render <Nome> out/<slug>_completo.mp4 --codec=h264
 .venv/bin/python scripts/verificar_zonas.py <Nome>          # sai com erro se algo entrar nas faixas
+```
+
+**Volume da voz:** o Remotion entrega a fala em torno de -25 LUFS, baixo para Reels. Depois de
+renderizar (o completo e o de 15 s), normalize para -14 LUFS — a imagem é copiada sem recompressão:
+
+```bash
+.venv/bin/python scripts/normalizar_som.py out/<slug>_completo.mp4 out/<slug>_final.mp4
 ```
 
 `verificar_zonas.py` renderiza duas vezes (sem a fala, e só o cenário) e compara quadro a quadro: o
