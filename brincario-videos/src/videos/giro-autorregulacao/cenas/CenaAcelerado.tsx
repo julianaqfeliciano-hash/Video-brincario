@@ -93,7 +93,7 @@ export const CenaAcelerado: React.FC = () => {
             />
           </g>
         )}
-        <Estalo x={780} y={420} tempo={tFunciona} raio={200} />
+        <Estalo x={780} y={420} tempo={tFunciona} raio={150} />
       </svg>
     </Cena>
   );

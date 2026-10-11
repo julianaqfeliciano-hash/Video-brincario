@@ -144,7 +144,7 @@ export const CenaAutorregulacao: React.FC = () => {
           "calma",
           cores.terracota,
         )}
-        <Estalo x={540} y={318} tempo={tAuto} raio={260} />
+        <Estalo x={540} y={430} tempo={tAuto} raio={165} />
       </svg>
     </Cena>
   );
